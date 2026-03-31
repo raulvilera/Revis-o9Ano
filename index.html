@@ -63,10 +63,13 @@
             padding: 6px 16px;
             border-radius: 40px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 180px;
         }
 
         .info-item label {
             font-weight: 600;
+            min-width: 45px;
         }
 
         select, input {
@@ -78,6 +81,12 @@
             font-weight: 500;
             cursor: pointer;
             outline: none;
+            flex: 1;
+        }
+
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: default;
         }
 
         .activity-title {
@@ -163,7 +172,6 @@
             border: 1px solid #c9dfec;
         }
 
-        /* Efeito de afundar quando selecionada */
         .alternativa.selected {
             background: #1f7a5a;
             border-color: #0a4a36;
@@ -289,6 +297,10 @@
         <div class="school-name">E.E.PROFª WANDA MASCAGNI DE SÁ</div>
         <div class="info-bar">
             <div class="info-item">
+                <label>Nº:</label>
+                <input type="text" id="numeroChamada" readonly placeholder="Automático">
+            </div>
+            <div class="info-item">
                 <label>NOME:</label>
                 <select id="alunoSelect">
                     <option value="">-- Selecione o aluno --</option>
@@ -296,10 +308,7 @@
             </div>
             <div class="info-item">
                 <label>SÉRIE:</label>
-                <select id="serieSelect">
-                    <option value="9º Ano A">9º Ano A</option>
-                    <option value="9º Ano B">9º Ano B</option>
-                </select>
+                <input type="text" id="serieInput" readonly placeholder="Automático">
             </div>
             <div class="info-item">
                 <label>DATA:</label>
@@ -323,42 +332,124 @@
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzZ5IMUHflnKLR1jZ_CpTJ3MczreRHXxWDJ1c_dhjdPKy2nDeGF6fypXQkSYfyozQ4/exec';
     const SPREADSHEET_ID = '12uVqpzcAhkHWWNL6eC1R5lEFVnvJhm4C3e4gPBQ5dF0';
 
-    // ==================== LISTA DE ALUNOS (9ºA e 9ºB) ====================
-    const alunos9A = [
-        "ALICE CARVALHO", "AMANDA PASSOS DE ALMEIDA", "ANA CLARA SOUSA DA COSTA", 
-        "ANA JULIA MENEZES DA SILVA", "ARTHUR COHEN BARRETO", "ARTHUR DAVI DE SOUZA FERNANDES",
-        "EDUARDA ALVES DE SOUZA", "EMANUEL ALVES OLIVEIRA", "ESTHER CRISTINE SILVA RIBEIRO",
-        "EVELLYN YASMIN TAVARES SILVA", "FELIPE DE SOUZA RODRIGUES", "FERNANDA POLACHINI MAYER GOMES MARQUES",
-        "GUSTAVO AUGUSTO TOMBOLO REIS", "HENRIQUE ROCHA CARVALHAL", "IGOR MARTINS PEREIRA",
-        "ISABELLA DOS SANTOS SALDANHA", "KAUANNY APARECIDA MALAQUIAS LIMA", "KÉTHILY NAYARA DA SILVA",
-        "LOHRAN ROMUALDO MENDES DA SILVA", "LUIS MIGUEL GONCALVES DA SILVA", "MARCELA ROBERTO DE OLIVEIRA",
-        "MIGUEL MARTINS DE ASSIS", "OMRAN RASEKH", "SARAH VITORIA ALVES OLIVEIRA", "WENDELL RAFAEL DE JESUS LESSA",
-        "WILHAN KENJI ANTONIO", "IAGO ANJOS DE JESUS", "FABIO HENRIQUE DA SILVA", "ALEJANDRO VIEIRA LIMA",
-        "ALLAN BEZERRA DE LIMA", "MANUELLA LELIS DA SILVA SIMAO", "GABRIELA SOUSA DA SILVA",
-        "ANA CLARA GONCALVES TORRES LOYOLA", "RENATO SOUZA SANTOS", "CHRISTOFER FELIPY SANTOS FONSECA",
-        "NICOLY VITORIA SANTOS DE MENEZES", "BEATRIZ TEODORO FURLAN", "MISAEL MARTINS DE ANDRADE JUNIOR"
+    // ==================== BASE DE DADOS DOS ALUNOS COM NÚMERO DE CHAMADA E SÉRIE ====================
+    // Dados extraídos do arquivo Turmas do Wanda.xlsx
+    // 9º Ano A (números de chamada conforme planilha)
+    const alunos9ADetalhados = [
+        { nome: "ALICE CARVALHO", numero: 1, serie: "9º Ano A" },
+        { nome: "AMANDA PASSOS DE ALMEIDA", numero: 2, serie: "9º Ano A" },
+        { nome: "ANA CLARA SOUSA DA COSTA", numero: 4, serie: "9º Ano A" },
+        { nome: "ANA JULIA MENEZES DA SILVA", numero: 5, serie: "9º Ano A" },
+        { nome: "ARTHUR COHEN BARRETO", numero: 7, serie: "9º Ano A" },
+        { nome: "ARTHUR DAVI DE SOUZA FERNANDES", numero: 8, serie: "9º Ano A" },
+        { nome: "EDUARDA ALVES DE SOUZA", numero: 9, serie: "9º Ano A" },
+        { nome: "EMANUEL ALVES OLIVEIRA", numero: 10, serie: "9º Ano A" },
+        { nome: "ESTHER CRISTINE SILVA RIBEIRO", numero: 11, serie: "9º Ano A" },
+        { nome: "EVELLYN YASMIN TAVARES SILVA", numero: 12, serie: "9º Ano A" },
+        { nome: "FELIPE DE SOUZA RODRIGUES", numero: 13, serie: "9º Ano A" },
+        { nome: "FERNANDA POLACHINI MAYER GOMES MARQUES", numero: 14, serie: "9º Ano A" },
+        { nome: "GUSTAVO AUGUSTO TOMBOLO REIS", numero: 16, serie: "9º Ano A" },
+        { nome: "HENRIQUE ROCHA CARVALHAL", numero: 17, serie: "9º Ano A" },
+        { nome: "IGOR MARTINS PEREIRA", numero: 18, serie: "9º Ano A" },
+        { nome: "ISABELLA DOS SANTOS SALDANHA", numero: 19, serie: "9º Ano A" },
+        { nome: "KAUANNY APARECIDA MALAQUIAS LIMA", numero: 22, serie: "9º Ano A" },
+        { nome: "KÉTHILY NAYARA DA SILVA", numero: 23, serie: "9º Ano A" },
+        { nome: "LOHRAN ROMUALDO MENDES DA SILVA", numero: 26, serie: "9º Ano A" },
+        { nome: "LUIS MIGUEL GONCALVES DA SILVA", numero: 27, serie: "9º Ano A" },
+        { nome: "MARCELA ROBERTO DE OLIVEIRA", numero: 28, serie: "9º Ano A" },
+        { nome: "MIGUEL MARTINS DE ASSIS", numero: 30, serie: "9º Ano A" },
+        { nome: "OMRAN RASEKH", numero: 31, serie: "9º Ano A" },
+        { nome: "SARAH VITORIA ALVES OLIVEIRA", numero: 33, serie: "9º Ano A" },
+        { nome: "WENDELL RAFAEL DE JESUS LESSA", numero: 27, serie: "9º Ano A" },
+        { nome: "WILHAN KENJI ANTONIO", numero: 28, serie: "9º Ano A" },
+        { nome: "IAGO ANJOS DE JESUS", numero: 29, serie: "9º Ano A" },
+        { nome: "FABIO HENRIQUE DA SILVA", numero: 30, serie: "9º Ano A" },
+        { nome: "ALEJANDRO VIEIRA LIMA", numero: 31, serie: "9º Ano A" },
+        { nome: "ALLAN BEZERRA DE LIMA", numero: 32, serie: "9º Ano A" },
+        { nome: "MANUELLA LELIS DA SILVA SIMAO", numero: 33, serie: "9º Ano A" },
+        { nome: "GABRIELA SOUSA DA SILVA", numero: 34, serie: "9º Ano A" },
+        { nome: "ANA CLARA GONCALVES TORRES LOYOLA", numero: 35, serie: "9º Ano A" },
+        { nome: "RENATO SOUZA SANTOS", numero: 37, serie: "9º Ano A" },
+        { nome: "CHRISTOFER FELIPY SANTOS FONSECA", numero: 38, serie: "9º Ano A" },
+        { nome: "NICOLY VITORIA SANTOS DE MENEZES", numero: 43, serie: "9º Ano A" },
+        { nome: "BEATRIZ TEODORO FURLAN", numero: 43, serie: "9º Ano A" },
+        { nome: "MISAEL MARTINS DE ANDRADE JUNIOR", numero: 44, serie: "9º Ano A" }
     ];
-    const alunos9B = [
-        "ANNA BEATRIZ SANTIAGO DA SILVA", "ELIAS SILVA DE LIMA", "ANA BEATRIZ DE LIMA TOMAZ",
-        "EVERTON HENRIQUE CARMO RODRIGUES", "GABRIELA VITORIA SEVERA LINS", "JENNYFER VITORIA BASILIO GOMES",
-        "JULIO CESAR ALVES DOS SANTOS", "LORENA ALEXANDRE SANTOS DA SILVA", "LUAN VENITES BALBINO",
-        "MARIA EDUARDA FELIX DA SILVA", "MUNIQUE CRISTINA LUCAS", "NICOLAS PENTEADO",
-        "PAULO CELSO DA COSTA JUNIOR", "PIETRO RODRIGUES MIRANDA", "RAPHAELLY APARECIDA MARINHO DE OLIVEIRA",
-        "RENAN LEANDRO RODRIGUES VICENTE", "SOPHIA MENEZES DE ARAUJO", "THAYNA SEABRA DE OLIVEIRA DO NASCIMENTO",
-        "VITORIA MENEZES BRANDAO", "PIETRO COELHO MARTINS", "RAPHAEL DA SILVA TAVARES",
-        "VICTOR DANIEL GARCIA SANCHEZ", "VITOR VINICIUS PEREIRA VASCONCELOS", "FELIPE AUGUSTO DE SOUZA ALCARAZ",
-        "JULIA ARAUJO DE LIMA", "ANNY LUIZA MARQUES DE SOUZA", "LEANDRO MACIEL CORRÊA", "POUL WILLYAM MACHADO ALVES DOS SANTOS",
-        "ISABELLA MONTEIRO BARCELLOS"
+
+    // 9º Ano B (números de chamada conforme planilha)
+    const alunos9BDetalhados = [
+        { nome: "ANNA BEATRIZ SANTIAGO DA SILVA", numero: 1, serie: "9º Ano B" },
+        { nome: "ELIAS SILVA DE LIMA", numero: 3, serie: "9º Ano B" },
+        { nome: "ANA BEATRIZ DE LIMA TOMAZ", numero: 4, serie: "9º Ano B" },
+        { nome: "EVERTON HENRIQUE CARMO RODRIGUES", numero: 4, serie: "9º Ano B" },
+        { nome: "GABRIELA VITORIA SEVERA LINS", numero: 5, serie: "9º Ano B" },
+        { nome: "JENNYFER VITORIA BASILIO GOMES", numero: 6, serie: "9º Ano B" },
+        { nome: "JULIO CESAR ALVES DOS SANTOS", numero: 7, serie: "9º Ano B" },
+        { nome: "LORENA ALEXANDRE SANTOS DA SILVA", numero: 8, serie: "9º Ano B" },
+        { nome: "LUAN VENITES BALBINO", numero: 9, serie: "9º Ano B" },
+        { nome: "MARIA EDUARDA FELIX DA SILVA", numero: 11, serie: "9º Ano B" },
+        { nome: "MUNIQUE CRISTINA LUCAS", numero: 13, serie: "9º Ano B" },
+        { nome: "NICOLAS PENTEADO", numero: 14, serie: "9º Ano B" },
+        { nome: "PAULO CELSO DA COSTA JUNIOR", numero: 15, serie: "9º Ano B" },
+        { nome: "PIETRO RODRIGUES MIRANDA", numero: 18, serie: "9º Ano B" },
+        { nome: "RAPHAELLY APARECIDA MARINHO DE OLIVEIRA", numero: 19, serie: "9º Ano B" },
+        { nome: "RENAN LEANDRO RODRIGUES VICENTE", numero: 21, serie: "9º Ano B" },
+        { nome: "SOPHIA MENEZES DE ARAUJO", numero: 23, serie: "9º Ano B" },
+        { nome: "THAYNA SEABRA DE OLIVEIRA DO NASCIMENTO", numero: 24, serie: "9º Ano B" },
+        { nome: "VITORIA MENEZES BRANDAO", numero: 26, serie: "9º Ano B" },
+        { nome: "PIETRO COELHO MARTINS", numero: 26, serie: "9º Ano B" },
+        { nome: "RAPHAEL DA SILVA TAVARES", numero: 28, serie: "9º Ano B" },
+        { nome: "VICTOR DANIEL GARCIA SANCHEZ", numero: 29, serie: "9º Ano B" },
+        { nome: "VITOR VINICIUS PEREIRA VASCONCELOS", numero: 32, serie: "9º Ano B" },
+        { nome: "FELIPE AUGUSTO DE SOUZA ALCARAZ", numero: 34, serie: "9º Ano B" },
+        { nome: "JULIA ARAUJO DE LIMA", numero: 35, serie: "9º Ano B" },
+        { nome: "ANNY LUIZA MARQUES DE SOUZA", numero: 37, serie: "9º Ano B" },
+        { nome: "LEANDRO MACIEL CORRÊA", numero: 39, serie: "9º Ano B" },
+        { nome: "POUL WILLYAM MACHADO ALVES DOS SANTOS", numero: 40, serie: "9º Ano B" },
+        { nome: "ISABELLA MONTEIRO BARCELLOS", numero: 42, serie: "9º Ano B" }
     ];
-    const todosAlunos = [...alunos9A, ...alunos9B].sort((a,b)=>a.localeCompare(b));
+
+    // Unificar todos os alunos em um único array com índice por nome
+    const todosAlunosDetalhados = [...alunos9ADetalhados, ...alunos9BDetalhados];
+    const mapaAlunos = new Map();
+    todosAlunosDetalhados.forEach(aluno => {
+        mapaAlunos.set(aluno.nome, aluno);
+    });
+
+    // Ordenar alunos por nome para o dropdown
+    const nomesOrdenados = [...mapaAlunos.keys()].sort((a,b) => a.localeCompare(b));
     
+    // Preencher dropdown de alunos
     const alunoSelect = document.getElementById('alunoSelect');
-    todosAlunos.forEach(aluno => {
+    nomesOrdenados.forEach(nome => {
         const option = document.createElement('option');
-        option.value = aluno;
-        option.textContent = aluno;
+        option.value = nome;
+        option.textContent = nome;
         alunoSelect.appendChild(option);
     });
+
+    // Elementos para preenchimento automático
+    const numeroInput = document.getElementById('numeroChamada');
+    const serieInput = document.getElementById('serieInput');
+    
+    // Função para preencher automaticamente os campos ao selecionar o aluno
+    function preencherDadosAluno() {
+        const nomeSelecionado = alunoSelect.value;
+        if (nomeSelecionado && mapaAlunos.has(nomeSelecionado)) {
+            const dados = mapaAlunos.get(nomeSelecionado);
+            numeroInput.value = dados.numero;
+            serieInput.value = dados.serie;
+        } else {
+            numeroInput.value = '';
+            serieInput.value = '';
+        }
+    }
+    
+    // Adicionar evento de change ao select de alunos
+    alunoSelect.addEventListener('change', preencherDadosAluno);
+    
+    // Também preencher quando a página carregar (caso já tenha algum selecionado)
+    preencherDadosAluno();
 
     // ==================== QUESTÕES (10 questões) ====================
     const questoes = [
@@ -428,12 +519,9 @@
                 if(e.target.tagName !== 'INPUT') {
                     radio.checked = true;
                 }
-                // Remover classe selected de todas alternativas da mesma questão
                 const parentCard = alt.closest('.question-card');
                 parentCard.querySelectorAll('.alternativa').forEach(a => a.classList.remove('selected'));
-                // Adicionar classe selected na alternativa clicada
                 alt.classList.add('selected');
-                // Disparar evento change para manter consistência
                 radio.dispatchEvent(new Event('change', { bubbles: true }));
             });
             radio.addEventListener('change', () => {
@@ -475,7 +563,8 @@
     // Função para preparar e enviar dados
     async function enviarParaPlanilha() {
         const aluno = document.getElementById('alunoSelect').value;
-        const serie = document.getElementById('serieSelect').value;
+        const numero = document.getElementById('numeroChamada').value;
+        const serie = document.getElementById('serieInput').value;
         const data = document.getElementById('dataAtividade').value;
         
         if(!aluno) {
@@ -499,6 +588,7 @@
         const payload = {
             spreadsheetId: SPREADSHEET_ID,
             aluno: aluno,
+            numero: numero,
             turma: serie,
             data: data,
             acertos: acertos,
@@ -520,8 +610,7 @@
                 body: JSON.stringify(payload)
             });
             
-            // Com no-cors, não podemos ler a resposta, mas assumimos sucesso
-            showMessage(`✅ Respostas registradas! Aluno: ${aluno} | Acertos: ${acertos}/${questoes.length} (${payload.percentual}%)`, true);
+            showMessage(`✅ Respostas registradas! Aluno: ${aluno} (Nº ${numero}) | Acertos: ${acertos}/${questoes.length} (${payload.percentual}%)`, true);
             return true;
         } catch (error) {
             console.error('Erro no envio:', error);
