@@ -18,13 +18,11 @@
             min-height: 100vh;
         }
 
-        /* Container Principal */
         .main-container {
             max-width: 1100px;
             margin: 0 auto;
         }
 
-        /* Card Principal */
         .activity-card {
             background: white;
             border-radius: 32px;
@@ -32,7 +30,6 @@
             overflow: hidden;
         }
 
-        /* Cabeçalho */
         .header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             padding: 30px 35px;
@@ -43,19 +40,16 @@
             font-size: 1.4rem;
             font-weight: 600;
             text-align: center;
-            letter-spacing: 1px;
             margin-bottom: 20px;
-            opacity: 0.95;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             background: rgba(255,255,255,0.15);
             padding: 20px 25px;
             border-radius: 20px;
-            margin-top: 10px;
         }
 
         .info-field {
@@ -79,19 +73,12 @@
             border-radius: 12px;
             font-size: 0.9rem;
             font-weight: 500;
-            color: #1e293b;
             outline: none;
-            transition: all 0.2s;
             font-family: inherit;
-        }
-
-        .info-field input:focus, .info-field select:focus {
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
         }
 
         .info-field input[readonly] {
             background: #eef2ff;
-            cursor: default;
         }
 
         .activity-title {
@@ -99,28 +86,21 @@
             font-size: 1.8rem;
             font-weight: 800;
             margin-top: 20px;
-            letter-spacing: -0.5px;
         }
 
-        /* Conteúdo */
         .content {
             padding: 30px 35px;
             background: #f8fafc;
         }
 
-        /* Questões */
         .question-card {
-            background: linear-gradient(145deg, #ffffff, #f0f9ff);
+            background: white;
             border-radius: 24px;
             margin-bottom: 20px;
             padding: 24px 28px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.8);
-            transition: all 0.2s ease;
-            border: 1px solid rgba(59, 130, 246, 0.15);
-        }
-
-        .question-card:hover {
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
         }
 
         .question-header {
@@ -138,7 +118,6 @@
             padding: 6px 18px;
             border-radius: 40px;
             font-size: 0.85rem;
-            letter-spacing: 0.5px;
         }
 
         .question-text {
@@ -153,27 +132,67 @@
             border-left: 4px solid #3b82f6;
         }
 
-        /* Imagem */
-        .image-container {
+        /* ========== SISTEMA DE IMAGENS SIMPLIFICADO ========== */
+        .image-box {
             margin: 15px 0 20px 0;
-            background: #f1f5f9;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
             border-radius: 20px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 2px dashed #f59e0b;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .image-container img {
-            max-width: 100%;
-            max-height: 180px;
-            border-radius: 12px;
-            object-fit: contain;
+        .image-box:hover {
+            background: linear-gradient(135deg, #fde68a, #fcd34d);
+        }
+
+        .image-emoji {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .image-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 5px;
         }
 
         .image-caption {
             font-size: 0.7rem;
-            color: #475569;
-            margin-top: 8px;
+            color: #b45309;
+        }
+
+        .image-url-input {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .image-url-input input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            background: white;
+        }
+
+        .image-box.has-image {
+            background: white;
+            border: 2px solid #10b981;
+        }
+
+        .image-box.has-image .image-emoji {
+            display: none;
+        }
+
+        .image-box.has-image img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 12px;
         }
 
         /* Alternativas */
@@ -188,7 +207,7 @@
             display: flex;
             align-items: flex-start;
             gap: 14px;
-            background: white;
+            background: #f8fafc;
             padding: 12px 18px;
             border-radius: 60px;
             cursor: pointer;
@@ -197,7 +216,7 @@
         }
 
         .alternative-item:hover {
-            background: #f8fafc;
+            background: #f1f5f9;
             transform: translateX(4px);
         }
 
@@ -205,7 +224,6 @@
             background: #1f7a5a;
             border-color: #0a4a36;
             transform: translateY(2px);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .alternative-item.selected .alternative-text {
@@ -229,7 +247,6 @@
             flex: 1;
         }
 
-        /* Botão Enviar */
         .submit-area {
             margin-top: 40px;
             text-align: center;
@@ -247,11 +264,9 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 6px 14px rgba(31, 122, 90, 0.3);
-            font-family: inherit;
         }
 
         .btn-submit:hover {
-            background: linear-gradient(135deg, #0f5e44, #0a4a36);
             transform: scale(0.98);
             box-shadow: 0 4px 10px rgba(31, 122, 90, 0.4);
         }
@@ -259,11 +274,8 @@
         .btn-submit:disabled {
             background: #94a3b8;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
-        /* Mensagem de Status */
         .status-message {
             margin-top: 20px;
             padding: 14px 20px;
@@ -302,7 +314,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Rodapé */
         .footer {
             background: #f1f5f9;
             padding: 20px 35px;
@@ -312,33 +323,15 @@
             border-top: 1px solid #e2e8f0;
         }
 
-        /* Responsividade */
         @media (max-width: 768px) {
-            body {
-                padding: 20px 12px;
-            }
-            .header {
-                padding: 20px;
-            }
             .content {
                 padding: 20px;
             }
             .question-card {
                 padding: 16px;
             }
-            .question-text {
-                font-size: 0.95rem;
-                padding: 12px;
-            }
             .alternative-item {
                 padding: 10px 14px;
-            }
-            .alternative-text {
-                font-size: 0.85rem;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
             }
         }
     </style>
@@ -346,7 +339,6 @@
 <body>
 <div class="main-container">
     <div class="activity-card">
-        <!-- Cabeçalho -->
         <div class="header">
             <div class="school-name">E.E. PROFª WANDA MASCAGNI DE SÁ</div>
             <div class="info-grid">
@@ -369,14 +361,11 @@
                     <input type="date" id="dataAtividade">
                 </div>
             </div>
-            <div class="activity-title">⚛️ ATIVIDADE DE CIÊNCIAS ⚛️<br><span style="font-size: 1rem;">1º BIMESTRE | 9º ANO</span></div>
+            <div class="activity-title">🔬 ATIVIDADE DE CIÊNCIAS 🔬<br><span style="font-size: 1rem;">1º BIMESTRE | 9º ANO</span></div>
         </div>
 
-        <!-- Conteúdo das Questões -->
         <div class="content">
             <div id="questionsContainer"></div>
-
-            <!-- Área de Envio -->
             <div class="submit-area">
                 <button class="btn-submit" id="enviarBtn">📤 ENVIAR RESPOSTAS</button>
                 <div id="statusMessage" class="status-message"></div>
@@ -394,9 +383,8 @@
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzZ5IMUHflnKLR1jZ_CpTJ3MczreRHXxWDJ1c_dhjdPKy2nDeGF6fypXQkSYfyozQ4/exec';
     const SPREADSHEET_ID = '12uVqpzcAhkHWWNL6eC1R5lEFVnvJhm4C3e4gPBQ5dF0';
 
-    // ==================== BASE DE DADOS DOS ALUNOS ====================
+    // ==================== ALUNOS ====================
     const alunosData = [
-        // 9º Ano A
         { nome: "ALICE CARVALHO", numero: 1, serie: "9º Ano A" },
         { nome: "AMANDA PASSOS DE ALMEIDA", numero: 2, serie: "9º Ano A" },
         { nome: "ANA CLARA SOUSA DA COSTA", numero: 4, serie: "9º Ano A" },
@@ -421,19 +409,6 @@
         { nome: "MIGUEL MARTINS DE ASSIS", numero: 30, serie: "9º Ano A" },
         { nome: "OMRAN RASEKH", numero: 31, serie: "9º Ano A" },
         { nome: "SARAH VITORIA ALVES OLIVEIRA", numero: 33, serie: "9º Ano A" },
-        { nome: "IAGO ANJOS DE JESUS", numero: 29, serie: "9º Ano A" },
-        { nome: "FABIO HENRIQUE DA SILVA", numero: 30, serie: "9º Ano A" },
-        { nome: "ALEJANDRO VIEIRA LIMA", numero: 31, serie: "9º Ano A" },
-        { nome: "ALLAN BEZERRA DE LIMA", numero: 32, serie: "9º Ano A" },
-        { nome: "MANUELLA LELIS DA SILVA SIMAO", numero: 33, serie: "9º Ano A" },
-        { nome: "GABRIELA SOUSA DA SILVA", numero: 34, serie: "9º Ano A" },
-        { nome: "ANA CLARA GONCALVES TORRES LOYOLA", numero: 35, serie: "9º Ano A" },
-        { nome: "RENATO SOUZA SANTOS", numero: 37, serie: "9º Ano A" },
-        { nome: "CHRISTOFER FELIPY SANTOS FONSECA", numero: 38, serie: "9º Ano A" },
-        { nome: "NICOLY VITORIA SANTOS DE MENEZES", numero: 43, serie: "9º Ano A" },
-        { nome: "BEATRIZ TEODORO FURLAN", numero: 43, serie: "9º Ano A" },
-        { nome: "MISAEL MARTINS DE ANDRADE JUNIOR", numero: 44, serie: "9º Ano A" },
-        // 9º Ano B
         { nome: "ANNA BEATRIZ SANTIAGO DA SILVA", numero: 1, serie: "9º Ano B" },
         { nome: "ELIAS SILVA DE LIMA", numero: 3, serie: "9º Ano B" },
         { nome: "ANA BEATRIZ DE LIMA TOMAZ", numero: 4, serie: "9º Ano B" },
@@ -453,24 +428,13 @@
         { nome: "SOPHIA MENEZES DE ARAUJO", numero: 23, serie: "9º Ano B" },
         { nome: "THAYNA SEABRA DE OLIVEIRA DO NASCIMENTO", numero: 24, serie: "9º Ano B" },
         { nome: "VITORIA MENEZES BRANDAO", numero: 26, serie: "9º Ano B" },
-        { nome: "PIETRO COELHO MARTINS", numero: 26, serie: "9º Ano B" },
-        { nome: "RAPHAEL DA SILVA TAVARES", numero: 28, serie: "9º Ano B" },
-        { nome: "VICTOR DANIEL GARCIA SANCHEZ", numero: 29, serie: "9º Ano B" },
-        { nome: "VITOR VINICIUS PEREIRA VASCONCELOS", numero: 32, serie: "9º Ano B" },
-        { nome: "FELIPE AUGUSTO DE SOUZA ALCARAZ", numero: 34, serie: "9º Ano B" },
-        { nome: "JULIA ARAUJO DE LIMA", numero: 35, serie: "9º Ano B" },
-        { nome: "ANNY LUIZA MARQUES DE SOUZA", numero: 37, serie: "9º Ano B" },
-        { nome: "LEANDRO MACIEL CORRÊA", numero: 39, serie: "9º Ano B" },
-        { nome: "POUL WILLYAM MACHADO ALVES DOS SANTOS", numero: 40, serie: "9º Ano B" },
         { nome: "ISABELLA MONTEIRO BARCELLOS", numero: 42, serie: "9º Ano B" }
     ];
 
-    // Ordenar alunos por nome
     const alunosOrdenados = [...alunosData].sort((a, b) => a.nome.localeCompare(b.nome));
     const alunoMap = new Map();
     alunosOrdenados.forEach(a => alunoMap.set(a.nome, a));
 
-    // Preencher dropdown
     const alunoSelect = document.getElementById('alunoSelect');
     alunosOrdenados.forEach(aluno => {
         const option = document.createElement('option');
@@ -497,59 +461,57 @@
     alunoSelect.addEventListener('change', preencherDadosAluno);
     preencherDadosAluno();
 
-    // Data atual
     const dataInput = document.getElementById('dataAtividade');
-    if (!dataInput.value) {
-        dataInput.value = new Date().toISOString().slice(0, 10);
-    }
+    if (!dataInput.value) dataInput.value = new Date().toISOString().slice(0, 10);
 
-    // ==================== QUESTÕES ====================
+    // ==================== QUESTÕES COM IMAGENS SIMPLIFICADAS ====================
+    // CADA QUESTÃO TEM UM EMOJI E UM TÍTULO - VOCÊ PODE SUBSTITUIR PELO LINK DA IMAGEM REAL
+    // PARA INSERIR UMA IMAGEM REAL, BASTA COLOCAR O LINK NO CAMPO "imageUrl" ABAIXO
     const questoes = [
-   {
-  text: "O médico húngaro Ignaz Semmelweis, no século XIX, observou altas taxas de mortalidade de puérperas. Ele levantou várias hipóteses e, após testá-las, concluiu que a contaminação ocorria pelas mãos dos médicos que iam direto da necropsia para a sala de parto. Com base no episódio e na definição de ciência proposta por Lee McIntyre (atitude científica), assinale a alternativa que melhor representa a postura de Semmelweis diante de suas hipóteses iniciais.",
-
-  options: [
-    "Apegou-se à teoria dos miasmas, pois era aceita pelos colegas da época.",
-    "Rejeitou todas as evidências por não concordar com a superlotação na ala.",
-    "Manteve a ideia de que o sino do padre era a principal causa dos óbitos.",
-    "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência e testando novas explicações."
-  ],
-
-  img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNvNVUdgQLRPpAPb5OmJsKWg4v2Aiqs_Sqmd6GqPQxUTJQpJqbnByJ3T3ExpdgDLXOMUwhvL8lKOEA3D0NT5dV1wxNsOV9IMDzRSJ1dtgZHkVl1k1qj1g3urQLTXaYGGRKhxwB-0BeoHdUC4Bbb3x0uge1zhGxlfbBfnRA9-dlDtd_kh37YBck66teZYFD/s282/images%20%281%29.jfif",
-
-  imgDesc: "Retrato de Ignaz Semmelweis - pioneiro na higienização das mãos",
-
-  correct: 3
-},    { text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. No texto, o autor sugere que toda tentativa de testar a existência do dragão é barrada por desculpas que impedem qualquer verificação. De acordo com o método científico, a principal falha dessa alegação é que:",
-            options: ["não se baseia em observações do cotidiano.", "a hipótese não é falseável, ou seja, não pode ser testada nem refutada por evidências.", "a garagem é um local inadequado para um dragão mitológico.", "não apresenta uma conclusão organizada em forma de gráfico."],
-            correct: 1, imgDesc: "Ilustração do dragão invisível de Carl Sagan" },
-        { text: "Uma notícia circula nas redes sociais com o título: 'Tomar suco de limão em jejum emagrece e os Cientistas não querem que você saiba!'. Ao analisar a mensagem, nota-se tom conspiratório, ausência de fontes confiáveis e o autor não é um especialista reconhecido. Qual atitude crítica deve ser tomada?",
-            options: ["Compartilhar imediatamente, pois todo conteúdo com muitas visualizações é verdadeiro.", "Acreditar porque cita 'cientistas', mesmo sem nomear instituição.", "Verificar a autoria, a data, possíveis vieses, e buscar fontes como artigos revisados ou instituições científicas respeitadas.", "Ignorar a data de publicação, pois o título sensacionalista garante a veracidade."],
-            correct: 2, imgDesc: "Alerta sobre fake news e desinformação científica" },
-        { text: "O texto adaptado do e-book 'Mudanças climáticas e a sociedade' (IAG-USP) menciona que 97% dos artigos científicos revisados concordam que o aquecimento global tem origem nas atividades humanas. Além disso, cita instituições como IPCC e Organização Meteorológica Mundial. A principal razão para considerar esse texto uma fonte confiável é:",
-            options: ["apresentar uma opinião polêmica sobre o clima.", "ser escrito por um único autor sem referências acadêmicas.", "basear-se em evidências, mencionar estudos revisados por pares e ser produzido por uma instituição científica de renome (IAG/USP).", "ignorar dados de temperatura e focar apenas em previsões."],
-            correct: 2, imgDesc: "Gráfico de aumento da temperatura global e logos do IPCC" },
-        { text: "Leucipo e Demócrito, na Grécia Antiga, propuseram a existência do átomo como partícula indivisível. Séculos depois, John Dalton retomou essa ideia, mas acrescentou que os átomos de um mesmo elemento são idênticos em massa e propriedades. Qual foi a principal contribuição de Dalton?",
-            options: ["Afirmou que os átomos são divisíveis e possuem carga elétrica.", "Propôs que a matéria é contínua, sem partículas.", "Baseou sua teoria em evidências experimentais e Leis Ponderais, além de propor massas atômicas específicas.", "Negou a existência de átomos e defendeu os quatro elementos."],
-            correct: 2, imgDesc: "Modelo atômico de Dalton - bola de bilhar" },
-        { text: "O modelo de Rutherford (1911) revelou que o átomo possui um núcleo denso e positivo, com elétrons ao redor, mas apresentava uma limitação teórica. Niels Bohr solucionou esse problema ao propor que:",
-            options: ["os elétrons estão fixos na eletrosfera sem movimento.", "os elétrons ocupam órbitas com níveis de energia quantizados e saltam entre elas ao absorver ou liberar energia.", "o átomo é uma esfera maciça indivisível.", "os prótons estão espalhados como passas em um pudim."],
-            correct: 1, imgDesc: "Comparação dos modelos atômicos de Rutherford e Bohr" },
-        { text: "Em um dia frio, é comum observar o 'embaçamento' do espelho do banheiro após um banho quente. Isso acontece porque o vapor de água entra em contato com a superfície fria do espelho. Qual é essa transformação?",
-            options: ["Sublimação: do sólido para o gasoso.", "Fusão: do sólido para o líquido.", "Condensação: do gasoso para o líquido, com perda de energia térmica.", "Solidificação: do líquido para o sólido."],
-            correct: 2, imgDesc: "Espelho embaçado após banho quente" },
-        { text: "Água destilada (pura) apresenta ponto de fusão 0°C e ebulição 100°C constantes, enquanto a água do mar não ferve a uma temperatura fixa. Isso acontece porque:",
-            options: ["substâncias puras têm pontos de fusão/ebulição variáveis.", "misturas homogêneas apresentam patamares definidos.", "substâncias puras mantêm temperatura constante durante a mudança de estado; misturas têm componentes diferentes que alteram a curva de aquecimento.", "a água do mar não sofre ebulição."],
-            correct: 2, imgDesc: "Curva de aquecimento da água pura vs. mistura" },
-        { text: "No simulador PhET, ao aquecer um sistema fechado com água e pressionar a tampa, observa-se aumento da pressão e temperatura. Isso demonstra que:",
-            options: ["a energia térmica não interfere no movimento molecular.", "ao comprimir o gás, as moléculas colidem mais frequentemente, aumentando pressão e energia cinética.", "a matéria não obedece à lei de conservação de energia.", "a água não pode existir no estado gasoso em recipiente fechado."],
-            correct: 1, imgDesc: "Simulador PhET Estados da Matéria" },
-        { text: "O hidrogênio possui três isótopos: prótio (¹H), deutério (²H) e trítio (³H). Todos têm o mesmo número atômico (Z=1), mas diferem na massa atômica. Podemos afirmar que:",
-            options: ["isótopos são elementos diferentes na tabela periódica.", "o número de nêutrons varia, mas o número de prótons permanece igual, mantendo-os no mesmo elemento químico.", "a tabela periódica organiza os elementos pela massa atômica decrescente.", "o hidrogênio não possui isótopos estáveis."],
-            correct: 1, imgDesc: "Isótopos do hidrogênio" }
+        { text: "O médico húngaro Ignaz Semmelweis, no século XIX, observou altas taxas de mortalidade de puérperas. Ele levantou várias hipóteses e, após testá-las, concluiu que a contaminação ocorria pelas mãos dos médicos. Com base no episódio e na definição de ciência proposta por Lee McIntyre, assinale a alternativa que melhor representa a postura de Semmelweis.",
+            options: ["Apegou-se à teoria dos miasmas, pois era aceita pelos colegas.", "Rejeitou todas as evidências por não concordar com a superlotação.", "Manteve a ideia de que o sino do padre era a principal causa.", "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência."],
+            correct: 3, imageEmoji: "🧼", imageTitle: "Lavagem das Mãos", imageCaption: "Ignaz Semmelweis - Pioneiro da higienização", imageUrl: "" },
+        { text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. De acordo com o método científico, a principal falha dessa alegação é que:",
+            options: ["não se baseia em observações do cotidiano.", "a hipótese não é falseável, ou seja, não pode ser testada nem refutada.", "a garagem é um local inadequado.", "não apresenta uma conclusão organizada."],
+            correct: 1, imageEmoji: "🐉", imageTitle: "Dragão Invisível", imageCaption: "Metáfora de Carl Sagan sobre falseabilidade", imageUrl: "" },
+        { text: "Uma notícia circula nas redes sociais com o título: 'Tomar suco de limão em jejum emagrece e os Cientistas não querem que você saiba!'. Qual atitude crítica deve ser tomada?",
+            options: ["Compartilhar imediatamente.", "Acreditar porque cita 'cientistas'.", "Verificar a autoria, a data e buscar fontes confiáveis.", "Ignorar a data de publicação."],
+            correct: 2, imageEmoji: "📰", imageTitle: "Fake News", imageCaption: "Desinformação científica nas redes sociais", imageUrl: "" },
+        { text: "O texto 'Mudanças climáticas e a sociedade' (IAG-USP) menciona que 97% dos artigos científicos concordam que o aquecimento global tem origem humana. A principal razão para considerar esse texto confiável é:",
+            options: ["apresentar uma opinião polêmica.", "ser escrito por um único autor.", "basear-se em evidências e ser produzido por instituição científica de renome.", "ignorar dados de temperatura."],
+            correct: 2, imageEmoji: "🌡️", imageTitle: "Mudanças Climáticas", imageCaption: "Consenso científico - IPCC", imageUrl: "" },
+        { text: "Leucipo e Demócrito propuseram o átomo como partícula indivisível. John Dalton retomou essa ideia. Qual foi a principal contribuição de Dalton?",
+            options: ["Afirmou que os átomos são divisíveis.", "Propôs que a matéria é contínua.", "Baseou sua teoria em evidências experimentais e Leis Ponderais.", "Negou a existência de átomos."],
+            correct: 2, imageEmoji: "⚛️", imageTitle: "Modelo de Dalton", imageCaption: "Átomo como esfera maciça - Bola de Bilhar", imageUrl: "" },
+        { text: "O modelo de Rutherford revelou o núcleo atômico, mas tinha uma limitação. Niels Bohr solucionou esse problema ao propor que:",
+            options: ["elétrons estão fixos na eletrosfera.", "elétrons ocupam órbitas com níveis de energia quantizados.", "o átomo é uma esfera maciça.", "prótons estão espalhados como passas."],
+            correct: 1, imageEmoji: "🪐", imageTitle: "Modelo de Bohr", imageCaption: "Elétrons em órbitas com níveis de energia", imageUrl: "" },
+        { text: "Em um dia frio, é comum o 'embaçamento' do espelho após um banho quente. Qual transformação ocorre?",
+            options: ["Sublimação", "Fusão", "Condensação (gasoso → líquido)", "Solidificação"],
+            correct: 2, imageEmoji: "🪞", imageTitle: "Embaçamento do Espelho", imageCaption: "Condensação do vapor de água", imageUrl: "" },
+        { text: "Água destilada tem ponto de fusão e ebulição constantes, enquanto água do mar não. Por quê?",
+            options: ["Substâncias puras têm pontos variáveis.", "Misturas têm patamares definidos.", "Substâncias puras mantêm temperatura constante durante mudança de estado; misturas têm componentes diferentes.", "Água do mar não ferve."],
+            correct: 2, imageEmoji: "💧", imageTitle: "Curva de Aquecimento", imageCaption: "Patamares na substância pura vs. mistura", imageUrl: "" },
+        { text: "No simulador PhET, ao aquecer um sistema fechado e pressionar a tampa, observa-se aumento de pressão e temperatura. Isso demonstra que:",
+            options: ["energia térmica não interfere.", "ao comprimir o gás, moléculas colidem mais, aumentando pressão e energia cinética.", "matéria não obedece à conservação de energia.", "água não existe no estado gasoso."],
+            correct: 1, imageEmoji: "🔬", imageTitle: "Simulador PhET", imageCaption: "Comportamento das moléculas sob pressão", imageUrl: "" },
+        { text: "O hidrogênio possui três isótopos: prótio, deutério e trítio. Todos têm o mesmo número atômico, mas diferem na massa. Podemos afirmar que:",
+            options: ["isótopos são elementos diferentes.", "o número de nêutrons varia, mas o número de prótons permanece igual.", "a tabela periódica organiza pela massa decrescente.", "hidrogênio não possui isótopos estáveis."],
+            correct: 1, imageEmoji: "🔬", imageTitle: "Isótopos do Hidrogênio", imageCaption: "Mesmo número de prótons, diferentes nêutrons", imageUrl: "" }
     ];
 
-    // Renderizar questões
+    // Função para renderizar imagem (simples - emoji ou URL real)
+    function renderImage(questao) {
+        if (questao.imageUrl && questao.imageUrl.trim() !== "") {
+            return `<img src="${questao.imageUrl}" alt="${questao.imageTitle}" style="max-width: 100%; max-height: 180px; border-radius: 12px;">`;
+        } else {
+            return `<div class="image-emoji">${questao.imageEmoji}</div>
+                    <div class="image-title">📷 ${questao.imageTitle}</div>
+                    <div class="image-caption">${questao.imageCaption}</div>
+                    <div style="font-size:0.65rem; margin-top:8px; color:#b45309;">✨ Clique para adicionar imagem real</div>`;
+        }
+    }
+
     function renderQuestions() {
         const container = document.getElementById('questionsContainer');
         let html = '';
@@ -560,11 +522,12 @@
                         <span class="question-number">QUESTÃO ${idx + 1}</span>
                     </div>
                     <div class="question-text">${q.text}</div>
-                    <div class="image-container">
-                        <img src="https://placehold.co/600x180/e2e8f0/475569?text=📖+${encodeURIComponent(q.imgDesc.substring(0,50))}" 
-                             alt="${q.imgDesc}" 
-                             onerror="this.src='https://placehold.co/600x180/cbd5e1/1e293b?text=Imagem+Ilustrativa'">
-                        <div class="image-caption">${q.imgDesc}</div>
+                    <div class="image-box" onclick="ativarInserirImagem(${idx})">
+                        ${renderImage(q)}
+                        <div class="image-url-input" id="imgInput_${idx}" style="display: none;">
+                            <input type="text" id="imgUrl_${idx}" placeholder="Cole o link da imagem aqui..." value="${q.imageUrl || ''}">
+                            <button onclick="salvarImagem(${idx}); event.stopPropagation();" style="margin-top:8px; padding:4px 12px; background:#f59e0b; border:none; border-radius:8px; cursor:pointer;">✅ Salvar Imagem</button>
+                        </div>
                     </div>
                     <div class="alternatives-list">
                         ${q.options.map((opt, optIdx) => `
@@ -583,9 +546,7 @@
         document.querySelectorAll('.alternative-item').forEach(item => {
             const radio = item.querySelector('input[type="radio"]');
             item.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'INPUT') {
-                    radio.checked = true;
-                }
+                if (e.target.tagName !== 'INPUT') radio.checked = true;
                 const parentCard = item.closest('.question-card');
                 parentCard.querySelectorAll('.alternative-item').forEach(alt => alt.classList.remove('selected'));
                 item.classList.add('selected');
@@ -601,9 +562,48 @@
         });
     }
 
+    // Funções para inserir imagens (simples e práticas)
+    window.ativarInserirImagem = function(questaoIdx) {
+        const inputDiv = document.getElementById(`imgInput_${questaoIdx}`);
+        if (inputDiv) {
+            inputDiv.style.display = inputDiv.style.display === 'none' ? 'block' : 'none';
+        }
+    };
+
+    window.salvarImagem = function(questaoIdx) {
+        const urlInput = document.getElementById(`imgUrl_${questaoIdx}`);
+        const novaUrl = urlInput.value.trim();
+        if (novaUrl) {
+            questoes[questaoIdx].imageUrl = novaUrl;
+            // Re-renderizar a questão específica
+            const container = document.getElementById('questionsContainer');
+            const oldHtml = container.innerHTML;
+            renderQuestions();
+            // Manter respostas selecionadas após re-render
+            manterRespostasSelecionadas();
+        } else {
+            alert('Por favor, cole um link de imagem válido (ex: https://exemplo.com/imagem.jpg)');
+        }
+    };
+
+    function manterRespostasSelecionadas() {
+        questoes.forEach((_, idx) => {
+            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+            if (selected) {
+                const valor = selected.value;
+                const novaRadio = document.querySelector(`input[name="q${idx}"][value="${valor}"]`);
+                if (novaRadio) {
+                    novaRadio.checked = true;
+                    const parentItem = novaRadio.closest('.alternative-item');
+                    if (parentItem) parentItem.classList.add('selected');
+                }
+            }
+        });
+    }
+
     renderQuestions();
 
-    // Função para obter respostas
+    // Funções de envio
     function getRespostas() {
         const respostas = [];
         for (let i = 0; i < questoes.length; i++) {
@@ -613,17 +613,13 @@
         return respostas;
     }
 
-    // Exibir mensagem
     function showMessage(message, isSuccess) {
         const msgDiv = document.getElementById('statusMessage');
         msgDiv.textContent = message;
         msgDiv.className = `status-message ${isSuccess ? 'status-success' : 'status-error'}`;
-        setTimeout(() => {
-            msgDiv.className = 'status-message';
-        }, 5000);
+        setTimeout(() => msgDiv.className = 'status-message', 5000);
     }
 
-    // Enviar dados
     async function enviarRespostas() {
         const aluno = alunoSelect.value;
         const numero = numeroInput.value;
@@ -631,7 +627,7 @@
         const data = dataInput.value;
 
         if (!aluno) {
-            showMessage('❌ Por favor, selecione o nome do aluno antes de enviar.', false);
+            showMessage('❌ Selecione o nome do aluno antes de enviar.', false);
             return;
         }
 
@@ -661,7 +657,6 @@
         };
 
         const btn = document.getElementById('enviarBtn');
-        const originalText = btn.innerHTML;
         btn.disabled = true;
         btn.innerHTML = '📤 ENVIANDO... <span class="loading-spinner"></span>';
 
@@ -674,11 +669,10 @@
             });
             showMessage(`✅ Respostas registradas! ${aluno} (Nº ${numero}) | Acertos: ${acertos}/${questoes.length} (${payload.percentual}%)`, true);
         } catch (error) {
-            console.error(error);
-            showMessage('❌ Erro ao enviar. Verifique sua conexão e configuração do Web App.', false);
+            showMessage('❌ Erro ao enviar. Verifique sua conexão.', false);
         } finally {
             btn.disabled = false;
-            btn.innerHTML = originalText;
+            btn.innerHTML = '📤 ENVIAR RESPOSTAS';
         }
     }
 
