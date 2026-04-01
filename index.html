@@ -49,36 +49,53 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: 1fr 130px 110px;
+            grid-template-rows: auto auto;
+            gap: 12px 14px;
             background: rgba(255,255,255,0.15);
-            padding: 20px 25px;
+            padding: 18px 22px;
             border-radius: 20px;
         }
+
+        /* Linha 1: Nome ocupa col 1+2, Número ocupa col 3 */
+        .info-field.field-nome   { grid-column: 1 / 3; grid-row: 1; }
+        .info-field.field-numero { grid-column: 3;     grid-row: 1; }
+        /* Linha 2: Série ocupa col 1 (fixo), Data ocupa col 3 (fixo) */
+        .info-field.field-serie  { grid-column: 1;     grid-row: 2; }
+        .info-field.field-data   { grid-column: 3;     grid-row: 2; }
 
         .info-field {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
+            min-width: 0;
         }
 
         .info-field label {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             opacity: 0.85;
+            white-space: nowrap;
         }
 
         .info-field input, .info-field select {
             background: white;
             border: none;
-            padding: 10px 14px;
+            padding: 9px 12px;
             border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             outline: none;
             font-family: inherit;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .info-field.field-numero input,
+        .info-field.field-data input {
+            text-align: center;
         }
 
         .info-field input[readonly] {
@@ -394,21 +411,21 @@
         <div class="header">
             <div class="school-name">E.E. PROFª WANDA MASCAGNI DE SÁ</div>
             <div class="info-grid">
-                <div class="info-field">
-                    <label>📌 NÚMERO</label>
-                    <input type="text" id="numeroChamada" readonly placeholder="Selecione o aluno">
-                </div>
-                <div class="info-field">
+                <div class="info-field field-nome">
                     <label>👤 ALUNO(A)</label>
                     <select id="alunoSelect">
                         <option value="">-- Selecione o aluno --</option>
                     </select>
                 </div>
-                <div class="info-field">
+                <div class="info-field field-numero">
+                    <label>📌 Nº</label>
+                    <input type="text" id="numeroChamada" readonly placeholder="—">
+                </div>
+                <div class="info-field field-serie">
                     <label>🏫 SÉRIE</label>
                     <input type="text" id="serieInput" readonly placeholder="Automático">
                 </div>
-                <div class="info-field">
+                <div class="info-field field-data">
                     <label>📅 DATA</label>
                     <input type="date" id="dataAtividade">
                 </div>
