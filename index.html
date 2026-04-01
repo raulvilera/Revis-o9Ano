@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Atividade de Ciências - 1º Bimestre | 9º Ano</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +15,7 @@
 
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            font-family: 'Nunito Sans', 'Segoe UI', sans-serif;
             padding: 40px 20px;
             min-height: 100vh;
         }
@@ -37,10 +39,12 @@
         }
 
         .school-name {
+            font-family: 'Nunito', sans-serif;
             font-size: 1.4rem;
-            font-weight: 600;
+            font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
         .info-grid {
@@ -60,10 +64,10 @@
 
         .info-field label {
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .info-field input, .info-field select {
@@ -72,20 +76,23 @@
             padding: 10px 14px;
             border-radius: 12px;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
             outline: none;
             font-family: inherit;
         }
 
         .info-field input[readonly] {
             background: #eef2ff;
+            color: #3730a3;
         }
 
         .activity-title {
+            font-family: 'Nunito', sans-serif;
             text-align: center;
             font-size: 1.8rem;
-            font-weight: 800;
+            font-weight: 900;
             margin-top: 20px;
+            letter-spacing: 0.5px;
         }
 
         .content {
@@ -96,134 +103,196 @@
         .question-card {
             background: white;
             border-radius: 24px;
-            margin-bottom: 20px;
-            padding: 24px 28px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.2s;
+            margin-bottom: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
             border: 1px solid #e2e8f0;
+            transition: box-shadow 0.2s;
         }
 
+        .question-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.11);
+        }
+
+        /* ─── CABEÇALHO DA QUESTÃO ─── */
         .question-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 18px;
+            padding: 18px 24px 0;
             flex-wrap: wrap;
         }
 
         .question-number {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
-            font-weight: bold;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
             padding: 6px 18px;
             border-radius: 40px;
             font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── IMAGEM DA QUESTÃO ─── */
+        .question-image-wrapper {
+            position: relative;
+            width: 100%;
+            background: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Imagem real */
+        .question-image-wrapper.has-real-image {
+            max-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-image-wrapper.has-real-image img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .question-image-wrapper.has-real-image:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Overlay gradiente suave sobre imagem real */
+        .question-image-wrapper.has-real-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(15,23,42,0.55) 100%);
+            pointer-events: none;
+        }
+
+        /* Badge de label sobre a imagem */
+        .image-label-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 16px;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(6px);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+            z-index: 2;
+        }
+
+        /* Placeholder quando não há imagem (emoji) */
+        .question-image-wrapper.placeholder {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 6px;
+            padding: 20px;
+        }
+
+        .placeholder-emoji {
+            font-size: 3rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
+
+        .placeholder-title {
+            color: rgba(255,255,255,0.9);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .placeholder-caption {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.7rem;
+            text-align: center;
+        }
+
+        /* Simulador iframe */
+        .simulator-wrapper {
+            width: 100%;
+            background: #0f172a;
+            position: relative;
+        }
+
+        .simulator-wrapper iframe {
+            display: block;
+            width: 100%;
+            height: 480px;
+            border: none;
+        }
+
+        .simulator-label {
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            color: #38bdf8;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            z-index: 5;
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── CORPO DA QUESTÃO ─── */
+        .question-body {
+            padding: 20px 24px 22px;
         }
 
         .question-text {
-            font-size: 1.05rem;
-            line-height: 1.5;
+            font-size: 1rem;
+            line-height: 1.6;
             font-weight: 600;
             color: #0f172a;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             background: #f1f5f9;
-            padding: 16px 20px;
-            border-radius: 20px;
+            padding: 14px 18px;
+            border-radius: 16px;
             border-left: 4px solid #3b82f6;
         }
 
-        /* ========== SISTEMA DE IMAGENS SIMPLIFICADO ========== */
-        .image-box {
-            margin: 15px 0 20px 0;
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            border: 2px dashed #f59e0b;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .image-box:hover {
-            background: linear-gradient(135deg, #fde68a, #fcd34d);
-        }
-
-        .image-emoji {
-            font-size: 3.5rem;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .image-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 5px;
-        }
-
-        .image-caption {
-            font-size: 0.7rem;
-            color: #b45309;
-        }
-
-        .image-url-input {
-            display: none;
-            margin-top: 12px;
-        }
-
-        .image-url-input input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #f59e0b;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            background: white;
-        }
-
-        .image-box.has-image {
-            background: white;
-            border: 2px solid #10b981;
-        }
-
-        .image-box.has-image .image-emoji {
-            display: none;
-        }
-
-        .image-box.has-image img {
-            max-width: 100%;
-            max-height: 180px;
-            border-radius: 12px;
-        }
-
-        /* Alternativas */
         .alternatives-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 8px;
+            gap: 10px;
         }
 
         .alternative-item {
             display: flex;
             align-items: flex-start;
-            gap: 14px;
+            gap: 12px;
             background: #f8fafc;
-            padding: 12px 18px;
-            border-radius: 60px;
+            padding: 11px 16px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.15s ease;
-            border: 1px solid #e2e8f0;
+            border: 1.5px solid #e2e8f0;
         }
 
         .alternative-item:hover {
-            background: #f1f5f9;
-            transform: translateX(4px);
+            background: #eff6ff;
+            border-color: #93c5fd;
+            transform: translateX(3px);
         }
 
         .alternative-item.selected {
             background: #1f7a5a;
             border-color: #0a4a36;
-            transform: translateY(2px);
+            transform: translateY(1px);
         }
 
         .alternative-item.selected .alternative-text {
@@ -231,22 +300,23 @@
         }
 
         .alternative-item input[type="radio"] {
-            margin-top: 3px;
-            width: 18px;
-            height: 18px;
+            margin-top: 2px;
+            width: 17px;
+            height: 17px;
             cursor: pointer;
             accent-color: #1f7a5a;
             flex-shrink: 0;
         }
 
         .alternative-text {
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 0.93rem;
+            font-weight: 600;
             color: #1e293b;
             line-height: 1.4;
             flex: 1;
         }
 
+        /* ─── BOTÃO ENVIAR ─── */
         .submit-area {
             margin-top: 40px;
             text-align: center;
@@ -257,8 +327,9 @@
             background: linear-gradient(135deg, #1f7a5a, #0f5e44);
             border: none;
             padding: 16px 48px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.15rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
             color: white;
             border-radius: 60px;
             cursor: pointer;
@@ -280,7 +351,7 @@
             margin-top: 20px;
             padding: 14px 20px;
             border-radius: 16px;
-            font-weight: 500;
+            font-weight: 600;
             display: none;
         }
 
@@ -324,15 +395,13 @@
         }
 
         @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-            }
-            .question-card {
-                padding: 16px;
-            }
-            .alternative-item {
-                padding: 10px 14px;
-            }
+            .content { padding: 16px; }
+            .question-body { padding: 14px 16px 18px; }
+            .question-header { padding: 14px 16px 0; }
+            .alternative-item { padding: 10px 14px; border-radius: 40px; }
+            .question-image-wrapper.has-real-image img,
+            .question-image-wrapper.has-real-image { max-height: 180px; height: 180px; }
+            .simulator-wrapper iframe { height: 340px; }
         }
     </style>
 </head>
@@ -361,7 +430,7 @@
                     <input type="date" id="dataAtividade">
                 </div>
             </div>
-            <div class="activity-title">🔬 ATIVIDADE DE CIÊNCIAS 🔬<br><span style="font-size: 1rem;">1º BIMESTRE | 9º ANO</span></div>
+            <div class="activity-title">🔬 ATIVIDADE DE CIÊNCIAS 🔬<br><span style="font-size: 1rem; font-weight: 700;">1º BIMESTRE | 9º ANO</span></div>
         </div>
 
         <div class="content">
@@ -373,17 +442,15 @@
         </div>
 
         <div class="footer">
-            🌍 Ciências da Natureza - Currículo Paulista | Habilidades: Natureza da Ciência, Modelos Atômicos, Estados Físicos, Classificação Periódica, Leis Ponderais e Ondulatória
+            🌍 Ciências da Natureza — Currículo Paulista | Habilidades: Natureza da Ciência, Modelos Atômicos, Estados Físicos, Classificação Periódica, Leis Ponderais e Ondulatória
         </div>
     </div>
 </div>
 
 <script>
-    // ==================== CONFIGURAÇÕES ====================
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzZ5IMUHflnKLR1jZ_CpTJ3MczreRHXxWDJ1c_dhjdPKy2nDeGF6fypXQkSYfyozQ4/exec';
     const SPREADSHEET_ID = '12uVqpzcAhkHWWNL6eC1R5lEFVnvJhm4C3e4gPBQ5dF0';
 
-    // ==================== ALUNOS ====================
     const alunosData = [
         { nome: "ALICE CARVALHO", numero: 1, serie: "9º Ano A" },
         { nome: "AMANDA PASSOS DE ALMEIDA", numero: 2, serie: "9º Ano A" },
@@ -443,18 +510,15 @@
         alunoSelect.appendChild(option);
     });
 
-    const numeroInput = document.getElementById('numeroChamada');
-    const serieInput = document.getElementById('serieInput');
-
     function preencherDadosAluno() {
         const nome = alunoSelect.value;
         if (nome && alunoMap.has(nome)) {
             const dados = alunoMap.get(nome);
-            numeroInput.value = dados.numero;
-            serieInput.value = dados.serie;
+            document.getElementById('numeroChamada').value = dados.numero;
+            document.getElementById('serieInput').value = dados.serie;
         } else {
-            numeroInput.value = '';
-            serieInput.value = '';
+            document.getElementById('numeroChamada').value = '';
+            document.getElementById('serieInput').value = '';
         }
     }
 
@@ -464,53 +528,121 @@
     const dataInput = document.getElementById('dataAtividade');
     if (!dataInput.value) dataInput.value = new Date().toISOString().slice(0, 10);
 
-    // ==================== QUESTÕES COM IMAGENS SIMPLIFICADAS ====================
-    // CADA QUESTÃO TEM UM EMOJI E UM TÍTULO - VOCÊ PODE SUBSTITUIR PELO LINK DA IMAGEM REAL
-    // PARA INSERIR UMA IMAGEM REAL, BASTA COLOCAR O LINK NO CAMPO "imageUrl" ABAIXO
+    // ==================== QUESTÕES ====================
+    // simulator: true  → renderiza iframe do PhET ao invés de imagem
     const questoes = [
-        { text: "O médico húngaro Ignaz Semmelweis, no século XIX, observou altas taxas de mortalidade de puérperas. Ele levantou várias hipóteses e, após testá-las, concluiu que a contaminação ocorria pelas mãos dos médicos. Com base no episódio e na definição de ciência proposta por Lee McIntyre, assinale a alternativa que melhor representa a postura de Semmelweis.",
+        {
+            text: "O médico húngaro Ignaz Semmelweis, no século XIX, observou altas taxas de mortalidade de puérperas. Ele levantou várias hipóteses e, após testá-las, concluiu que a contaminação ocorria pelas mãos dos médicos. Com base no episódio e na definição de ciência proposta por Lee McIntyre, assinale a alternativa que melhor representa a postura de Semmelweis.",
             options: ["Apegou-se à teoria dos miasmas, pois era aceita pelos colegas.", "Rejeitou todas as evidências por não concordar com a superlotação.", "Manteve a ideia de que o sino do padre era a principal causa.", "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência."],
-            correct: 3, imageEmoji: "🧼", imageTitle: "Lavagem das Mãos", imageCaption: "Ignaz Semmelweis - Pioneiro da higienização", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOof9/s600/images.jfif" },
-        
-        { text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. De acordo com o método científico, a principal falha dessa alegação é que:",
+            correct: 3,
+            imageEmoji: "🧼", imageTitle: "Lavagem das Mãos", imageCaption: "Ignaz Semmelweis — Pioneiro da higienização",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOof9/s600/images.jfif"
+        },
+        {
+            text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. De acordo com o método científico, a principal falha dessa alegação é que:",
             options: ["não se baseia em observações do cotidiano.", "a hipótese não é falseável, ou seja, não pode ser testada nem refutada.", "a garagem é um local inadequado.", "não apresenta uma conclusão organizada."],
-            correct: 1, imageEmoji: "🐉", imageTitle: "Dragão Invisível", imageCaption: "Metáfora de Carl Sagan sobre falseabilidade", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNvNVUdgQLRPpAPb5OmJsKWg4v2Aiqs_Sqmd6GqPQxUTJQpJqbnByJ3T3ExpdgDLXOMUwhvL8lKOEA3D0NT5dV1wxNsOV9IMDzRSJ1dtgZHkVl1k1qj1g3urQLTXaYGGRKhxwB-0BeoHdUC4Bbb3x0uge1zhGxlfbBfnRA9-dlDtd_kh37YBck66teZYFD/s282/images%20%281%29.jfif" },
-        { text: "Uma notícia circula nas redes sociais com o título: 'Tomar suco de limão em jejum emagrece e os Cientistas não querem que você saiba!'. Qual atitude crítica deve ser tomada?",
+            correct: 1,
+            imageEmoji: "🐉", imageTitle: "Dragão Invisível", imageCaption: "Metáfora de Carl Sagan sobre falseabilidade",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNvNVUdgQLRPpAPb5OmJsKWg4v2Aiqs_Sqmd6GqPQxUTJQpJqbnByJ3T3ExpdgDLXOMUwhvL8lKOEA3D0NT5dV1wxNsOV9IMDzRSJ1dtgZHkVl1k1qj1g3urQLTXaYGGRKhxwB-0BeoHdUC4Bbb3x0uge1zhGxlfbBfnRA9-dlDtd_kh37YBck66teZYFD/s282/images%20%281%29.jfif"
+        },
+        {
+            text: "Uma notícia circula nas redes sociais com o título: 'Tomar suco de limão em jejum emagrece e os Cientistas não querem que você saiba!'. Qual atitude crítica deve ser tomada?",
             options: ["Compartilhar imediatamente.", "Acreditar porque cita 'cientistas'.", "Verificar a autoria, a data e buscar fontes confiáveis.", "Ignorar a data de publicação."],
-            correct: 2, imageEmoji: "📰", imageTitle: "Fake News", imageCaption: "Desinformação científica nas redes sociais", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiKVqxSX7tT_Y_tT8MEDd2A6hmdSgxzUo3EKnnZUR4R06drrYU-GRoRlAogLaHz4eiyFBNAhpOqzMSR81SNZzVy9XYdnl9S52iE5aY2f-0y9rHltrlfKpTYBZ7bX_0qt4enuEaZeCwzpdrd8HHgN-PkuDwyYDjRkB9Amy17q0fulKLvpnGdUdljPV13rit/s387/suco.PNG" },
-        { text: "O texto 'Mudanças climáticas e a sociedade' (IAG-USP) menciona que 97% dos artigos científicos concordam que o aquecimento global tem origem humana. A principal razão para considerar esse texto confiável é:",
+            correct: 2,
+            imageEmoji: "📰", imageTitle: "Fake News", imageCaption: "Desinformação científica nas redes sociais",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiKVqxSX7tT_Y_tT8MEDd2A6hmdSgxzUo3EKnnZUR4R06drrYU-GRoRlAogLaHz4eiyFBNAhpOqzMSR81SNZzVy9XYdnl9S52iE5aY2f-0y9rHltrlfKpTYBZ7bX_0qt4enuEaZeCwzpdrd8HHgN-PkuDwyYDjRkB9Amy17q0fulKLvpnGdUdljPV13rit/s387/suco.PNG"
+        },
+        {
+            text: "O texto 'Mudanças climáticas e a sociedade' (IAG-USP) menciona que 97% dos artigos científicos concordam que o aquecimento global tem origem humana. A principal razão para considerar esse texto confiável é:",
             options: ["apresentar uma opinião polêmica.", "ser escrito por um único autor.", "basear-se em evidências e ser produzido por instituição científica de renome.", "ignorar dados de temperatura."],
-            correct: 2, imageEmoji: "🌡️", imageTitle: "Mudanças Climáticas", imageCaption: "Consenso científico - IPCC", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR8baKCLyjXFp6Mcr3zWNW9QY-n4Ksrq7rGhLgXfLQtzkR-WA0GWvReSk11qC0c8GwdYmrMcVLakX35CxGbxEBQ3MFWZvk5DThLkUsrZN1q1nNgV_ScGLFsl1WgQCb8qwwwliOhOztqXULg6m3NA7-6xrDiR2z6UDN4guVZ1DGlyDDdHsVdofHKKElJYhz/s528/Capturar.PNG" },
-        { text: "Leucipo e Demócrito propuseram o átomo como partícula indivisível. John Dalton retomou essa ideia. Qual foi a principal contribuição de Dalton?",
+            correct: 2,
+            imageEmoji: "🌡️", imageTitle: "Mudanças Climáticas", imageCaption: "Consenso científico — IPCC",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR8baKCLyjXFp6Mcr3zWNW9QY-n4Ksrq7rGhLgXfLQtzkR-WA0GWvReSk11qC0c8GwdYmrMcVLakX35CxGbxEBQ3MFWZvk5DThLkUsrZN1q1nNgV_ScGLFsl1WgQCb8qwwwliOhOztqXULg6m3NA7-6xrDiR2z6UDN4guVZ1DGlyDDdHsVdofHKKElJYhz/s528/Capturar.PNG"
+        },
+        {
+            text: "Leucipo e Demócrito propuseram o átomo como partícula indivisível. John Dalton retomou essa ideia. Qual foi a principal contribuição de Dalton?",
             options: ["Afirmou que os átomos são divisíveis.", "Propôs que a matéria é contínua.", "Baseou sua teoria em evidências experimentais e Leis Ponderais.", "Negou a existência de átomos."],
-            correct: 2, imageEmoji: "⚛️", imageTitle: "Modelo de Dalton", imageCaption: "Átomo como esfera maciça - Bola de Bilhar", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQYDTQVpHCQkte9MX2Dzz-ltsCNUj3W4ulQfnvnu-sbRLYYvTfMfJgFskgEEGtx9l6IyYugkdWlMtP1yofYKjIW7BqBSajTaDMne8PfavmYYrDc3OmaJbrjwtBllHSw8yflIGkxKgzKa31LN8srtBWiuAV_WxiSKH3gBMR2Yp1BdMNuJzy0MiGOFISxGHA/s542/Capturar.PNG" },
-        { text: "O modelo de Rutherford revelou o núcleo atômico, mas tinha uma limitação. Niels Bohr solucionou esse problema ao propor que:",
+            correct: 2,
+            imageEmoji: "⚛️", imageTitle: "Modelo de Dalton", imageCaption: "Átomo como esfera maciça — Bola de Bilhar",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQYDTQVpHCQkte9MX2Dzz-ltsCNUj3W4ulQfnvnu-sbRLYYvTfMfJgFskgEEGtx9l6IyYugkdWlMtP1yofYKjIW7BqBSajTaDMne8PfavmYYrDc3OmaJbrjwtBllHSw8yflIGkxKgzKa31LN8srtBWiuAV_WxiSKH3gBMR2Yp1BdMNuJzy0MiGOFISxGHA/s542/Capturar.PNG"
+        },
+        {
+            text: "O modelo de Rutherford revelou o núcleo atômico, mas tinha uma limitação. Niels Bohr solucionou esse problema ao propor que:",
             options: ["elétrons estão fixos na eletrosfera.", "elétrons ocupam órbitas com níveis de energia quantizados.", "o átomo é uma esfera maciça.", "prótons estão espalhados como passas."],
-            correct: 1, imageEmoji: "🪐", imageTitle: "Modelo de Bohr", imageCaption: "Elétrons em órbitas com níveis de energia", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAO1smlyslokvL0FU9c38XwOS31nQ-9Oh8DNZmzcBrlh2kvwHy82X2CPMe_0mE-S3oOwrU-9CzEGnHeFzmZZZeAN0Vlby2GymADcxrags_e9vq0AxdcDYvWdEleO-bRvN1RCaRvakflpO9ja0E89-375_l3Pl-Wdo2WMxqUyJOtpHDMjWJCcCcL9NpCIG-/s584/Capturar.PNG" },
-        { text: "Em um dia frio, é comum o 'embaçamento' do espelho após um banho quente. Qual transformação ocorre?",
+            correct: 1,
+            imageEmoji: "🪐", imageTitle: "Modelo de Bohr", imageCaption: "Elétrons em órbitas com níveis de energia",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAO1smlyslokvL0FU9c38XwOS31nQ-9Oh8DNZmzcBrlh2kvwHy82X2CPMe_0mE-S3oOwrU-9CzEGnHeFzmZZZeAN0Vlby2GymADcxrags_e9vq0AxdcDYvWdEleO-bRvN1RCaRvakflpO9ja0E89-375_l3Pl-Wdo2WMxqUyJOtpHDMjWJCcCcL9NpCIG-/s584/Capturar.PNG"
+        },
+        {
+            text: "Em um dia frio, é comum o 'embaçamento' do espelho após um banho quente. Qual transformação ocorre?",
             options: ["Sublimação", "Fusão", "Condensação (gasoso → líquido)", "Solidificação"],
-            correct: 2, imageEmoji: "🪞", imageTitle: "Embaçamento do Espelho", imageCaption: "Condensação do vapor de água", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1-HvBGecxLAae07zgKiIiW4MDEm4Ciufqse9i6WI8eOnfm5qRMhVV1iJ46-nj_aqbHivctIr7NtO0Yn4FY32fdgqXHCXRh0tFL6K6gAqDXheRKbEMY-rBeTmfkisT3ySSSRQ08FabZJUPBZR88jaIPmnc7ORbHiWyba0DnzaH8cP4dYhwT7EaX4X-keWP/s600/Vidro.PNG" },
-        { text: "Água destilada tem ponto de fusão e ebulição constantes, enquanto água do mar não. Por quê?",
+            correct: 2,
+            imageEmoji: "🪞", imageTitle: "Embaçamento do Espelho", imageCaption: "Condensação do vapor de água",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1-HvBGecxLAae07zgKiIiW4MDEm4Ciufqse9i6WI8eOnfm5qRMhVV1iJ46-nj_aqbHivctIr7NtO0Yn4FY32fdgqXHCXRh0tFL6K6gAqDXheRKbEMY-rBeTmfkisT3ySSSRQ08FabZJUPBZR88jaIPmnc7ORbHiWyba0DnzaH8cP4dYhwT7EaX4X-keWP/s600/Vidro.PNG"
+        },
+        {
+            text: "Água destilada tem ponto de fusão e ebulição constantes, enquanto água do mar não. Por quê?",
             options: ["Substâncias puras têm pontos variáveis.", "Misturas têm patamares definidos.", "Substâncias puras mantêm temperatura constante durante mudança de estado; misturas têm componentes diferentes.", "Água do mar não ferve."],
-            correct: 2, imageEmoji: "💧", imageTitle: "Curva de Aquecimento", imageCaption: "Patamares na substância pura vs. mistura", imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPIAknFyo7X_pZiNeWw9B_ipQ2dGiSpwZK4Km-372YcZQBlxs3ODZEUV9GnxrDj6o59wJ5Lv7G3VURP3_teanbF9nD3mJZpk6IHgr-KrFKp_I0NmE_WnB4VfNM81BkmvuFYXptdPIpof8MXJbjDx5O0vmnbW7dBnVlAxmTntnENlbyv2bwca6Q3ML61QvS/s600/Imgem.PNG" },
-        { text: "No simulador PhET, ao aquecer um sistema fechado e pressionar a tampa, observa-se aumento de pressão e temperatura. Isso demonstra que:",
+            correct: 2,
+            imageEmoji: "💧", imageTitle: "Curva de Aquecimento", imageCaption: "Patamares na substância pura vs. mistura",
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPIAknFyo7X_pZiNeWw9B_ipQ2dGiSpwZK4Km-372YcZQBlxs3ODZEUV9GnxrDj6o59wJ5Lv7G3VURP3_teanbF9nD3mJZpk6IHgr-KrFKp_I0NmE_WnB4VfNM81BkmvuFYXptdPIpof8MXJbjDx5O0vmnbW7dBnVlAxmTntnENlbyv2bwca6Q3ML61QvS/s600/Imgem.PNG"
+        },
+        {
+            text: "No simulador PhET abaixo, aquece o sistema fechado e pressione a tampa. Observe o aumento de pressão e temperatura. Isso demonstra que:",
             options: ["energia térmica não interfere.", "ao comprimir o gás, moléculas colidem mais, aumentando pressão e energia cinética.", "matéria não obedece à conservação de energia.", "água não existe no estado gasoso."],
-            correct: 1, imageEmoji: "🔬", imageTitle: "Simulador PhET", imageCaption: "Comportamento das moléculas sob pressão", imageUrl: "" },
-        { text: "O hidrogênio possui três isótopos: prótio, deutério e trítio. Todos têm o mesmo número atômico, mas diferem na massa. Podemos afirmar que:",
+            correct: 1,
+            imageEmoji: "🔬", imageTitle: "Simulador PhET", imageCaption: "Interaja antes de responder!",
+            imageUrl: "",
+            simulator: true,
+            simulatorUrl: "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_pt_BR.html"
+        },
+        {
+            text: "O hidrogênio possui três isótopos: prótio, deutério e trítio. Todos têm o mesmo número atômico, mas diferem na massa. Podemos afirmar que:",
             options: ["isótopos são elementos diferentes.", "o número de nêutrons varia, mas o número de prótons permanece igual.", "a tabela periódica organiza pela massa decrescente.", "hidrogênio não possui isótopos estáveis."],
-            correct: 1, imageEmoji: "🔬", imageTitle: "Isótopos do Hidrogênio", imageCaption: "Mesmo número de prótons, diferentes nêutrons", imageUrl: "" }
+            correct: 1,
+            imageEmoji: "🔬", imageTitle: "Isótopos do Hidrogênio", imageCaption: "Mesmo número de prótons, diferentes nêutrons",
+            imageUrl: ""
+        }
     ];
 
-    // Função para renderizar imagem (simples - emoji ou URL real)
-    function renderImage(questao) {
-        if (questao.imageUrl && questao.imageUrl.trim() !== "") {
-            return `<img src="${questao.imageUrl}" alt="${questao.imageTitle}" style="max-width: 100%; max-height: 180px; border-radius: 12px;">`;
-        } else {
-            return `<div class="image-emoji">${questao.imageEmoji}</div>
-                    <div class="image-title">📷 ${questao.imageTitle}</div>
-                    <div class="image-caption">${questao.imageCaption}</div>
-                    <div style="font-size:0.65rem; margin-top:8px; color:#b45309;">✨ Clique para adicionar imagem real</div>`;
+    // ==================== RENDERIZAÇÃO DAS QUESTÕES ====================
+    function renderImageBlock(q, idx) {
+        // Caso especial: simulador PhET
+        if (q.simulator && q.simulatorUrl) {
+            return `
+                <div class="simulator-wrapper">
+                    <div class="simulator-label">🧪 ${q.imageCaption}</div>
+                    <iframe
+                        src="${q.simulatorUrl}"
+                        allowfullscreen
+                        title="Simulador PhET - ${q.imageTitle}"
+                        loading="lazy">
+                    </iframe>
+                </div>`;
         }
+
+        // Imagem real
+        if (q.imageUrl && q.imageUrl.trim() !== '') {
+            return `
+                <div class="question-image-wrapper has-real-image">
+                    <img src="${q.imageUrl}"
+                         alt="${q.imageTitle}"
+                         loading="lazy"
+                         onerror="this.closest('.question-image-wrapper').outerHTML='${buildPlaceholder(q).replace(/'/g, "&#39;")}'">
+                    <span class="image-label-badge">📷 ${q.imageTitle}</span>
+                </div>`;
+        }
+
+        // Placeholder emoji
+        return buildPlaceholder(q);
+    }
+
+    function buildPlaceholder(q) {
+        return `<div class="question-image-wrapper placeholder">
+                    <span class="placeholder-emoji">${q.imageEmoji}</span>
+                    <span class="placeholder-title">${q.imageTitle}</span>
+                    <span class="placeholder-caption">${q.imageCaption}</span>
+                </div>`;
     }
 
     function renderQuestions() {
@@ -522,28 +654,23 @@
                     <div class="question-header">
                         <span class="question-number">QUESTÃO ${idx + 1}</span>
                     </div>
-                    <div class="question-text">${q.text}</div>
-                    <div class="image-box" onclick="ativarInserirImagem(${idx})">
-                        ${renderImage(q)}
-                        <div class="image-url-input" id="imgInput_${idx}" style="display: none;">
-                            <input type="text" id="imgUrl_${idx}" placeholder="Cole o link da imagem aqui..." value="${q.imageUrl || ''}">
-                            <button onclick="salvarImagem(${idx}); event.stopPropagation();" style="margin-top:8px; padding:4px 12px; background:#f59e0b; border:none; border-radius:8px; cursor:pointer;">✅ Salvar Imagem</button>
+                    ${renderImageBlock(q, idx)}
+                    <div class="question-body">
+                        <div class="question-text">${q.text}</div>
+                        <div class="alternatives-list">
+                            ${q.options.map((opt, optIdx) => `
+                                <div class="alternative-item" data-q="${idx}" data-val="${optIdx}">
+                                    <input type="radio" name="q${idx}" value="${optIdx}" id="q${idx}_opt${optIdx}">
+                                    <span class="alternative-text">${String.fromCharCode(65 + optIdx)}. ${opt}</span>
+                                </div>
+                            `).join('')}
                         </div>
-                    </div>
-                    <div class="alternatives-list">
-                        ${q.options.map((opt, optIdx) => `
-                            <div class="alternative-item" data-q="${idx}" data-val="${optIdx}">
-                                <input type="radio" name="q${idx}" value="${optIdx}" id="q${idx}_opt${optIdx}">
-                                <span class="alternative-text">${String.fromCharCode(65 + optIdx)}. ${opt}</span>
-                            </div>
-                        `).join('')}
                     </div>
                 </div>
             `;
         });
         container.innerHTML = html;
 
-        // Adicionar eventos de seleção
         document.querySelectorAll('.alternative-item').forEach(item => {
             const radio = item.querySelector('input[type="radio"]');
             item.addEventListener('click', (e) => {
@@ -551,67 +678,24 @@
                 const parentCard = item.closest('.question-card');
                 parentCard.querySelectorAll('.alternative-item').forEach(alt => alt.classList.remove('selected'));
                 item.classList.add('selected');
-                radio.dispatchEvent(new Event('change', { bubbles: true }));
             });
             radio.addEventListener('change', () => {
                 if (radio.checked) {
-                    const parentCard = item.closest('.question-card');
-                    parentCard.querySelectorAll('.alternative-item').forEach(alt => alt.classList.remove('selected'));
+                    item.closest('.question-card').querySelectorAll('.alternative-item').forEach(alt => alt.classList.remove('selected'));
                     item.classList.add('selected');
                 }
             });
         });
     }
 
-    // Funções para inserir imagens (simples e práticas)
-    window.ativarInserirImagem = function(questaoIdx) {
-        const inputDiv = document.getElementById(`imgInput_${questaoIdx}`);
-        if (inputDiv) {
-            inputDiv.style.display = inputDiv.style.display === 'none' ? 'block' : 'none';
-        }
-    };
-
-    window.salvarImagem = function(questaoIdx) {
-        const urlInput = document.getElementById(`imgUrl_${questaoIdx}`);
-        const novaUrl = urlInput.value.trim();
-        if (novaUrl) {
-            questoes[questaoIdx].imageUrl = novaUrl;
-            // Re-renderizar a questão específica
-            const container = document.getElementById('questionsContainer');
-            const oldHtml = container.innerHTML;
-            renderQuestions();
-            // Manter respostas selecionadas após re-render
-            manterRespostasSelecionadas();
-        } else {
-            alert('Por favor, cole um link de imagem válido (ex: https://exemplo.com/imagem.jpg)');
-        }
-    };
-
-    function manterRespostasSelecionadas() {
-        questoes.forEach((_, idx) => {
-            const selected = document.querySelector(`input[name="q${idx}"]:checked`);
-            if (selected) {
-                const valor = selected.value;
-                const novaRadio = document.querySelector(`input[name="q${idx}"][value="${valor}"]`);
-                if (novaRadio) {
-                    novaRadio.checked = true;
-                    const parentItem = novaRadio.closest('.alternative-item');
-                    if (parentItem) parentItem.classList.add('selected');
-                }
-            }
-        });
-    }
-
     renderQuestions();
 
-    // Funções de envio
+    // ==================== ENVIO ====================
     function getRespostas() {
-        const respostas = [];
-        for (let i = 0; i < questoes.length; i++) {
-            const selected = document.querySelector(`input[name="q${i}"]:checked`);
-            respostas.push(selected ? parseInt(selected.value) : null);
-        }
-        return respostas;
+        return questoes.map((_, i) => {
+            const sel = document.querySelector(`input[name="q${i}"]:checked`);
+            return sel ? parseInt(sel.value) : null;
+        });
     }
 
     function showMessage(message, isSuccess) {
@@ -623,14 +707,11 @@
 
     async function enviarRespostas() {
         const aluno = alunoSelect.value;
-        const numero = numeroInput.value;
-        const serie = serieInput.value;
+        const numero = document.getElementById('numeroChamada').value;
+        const serie = document.getElementById('serieInput').value;
         const data = dataInput.value;
 
-        if (!aluno) {
-            showMessage('❌ Selecione o nome do aluno antes de enviar.', false);
-            return;
-        }
+        if (!aluno) { showMessage('❌ Selecione o nome do aluno antes de enviar.', false); return; }
 
         const respostas = getRespostas();
         let acertos = 0;
@@ -647,11 +728,7 @@
 
         const payload = {
             spreadsheetId: SPREADSHEET_ID,
-            aluno: aluno,
-            numero: numero,
-            turma: serie,
-            data: data,
-            acertos: acertos,
+            aluno, numero, turma: serie, data, acertos,
             total: questoes.length,
             percentual: Math.round((acertos / questoes.length) * 100),
             respostas: respostasDetalhadas
@@ -663,8 +740,7 @@
 
         try {
             await fetch(WEB_APP_URL, {
-                method: 'POST',
-                mode: 'no-cors',
+                method: 'POST', mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
