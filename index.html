@@ -47,22 +47,25 @@
             letter-spacing: 0.5px;
         }
 
+        /* Grid com 4 colunas de tamanho fixo/adequado ao conteúdo */
         .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 130px 110px;
-            grid-template-rows: auto auto;
-            gap: 12px 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
             background: rgba(255,255,255,0.15);
             padding: 18px 22px;
             border-radius: 20px;
+            align-items: flex-end;
         }
 
-        /* Linha 1: Nome ocupa col 1+2, Número ocupa col 3 */
-        .info-field.field-nome   { grid-column: 1 / 3; grid-row: 1; }
-        .info-field.field-numero { grid-column: 3;     grid-row: 1; }
-        /* Linha 2: Série ocupa col 1 (fixo), Data ocupa col 3 (fixo) */
-        .info-field.field-serie  { grid-column: 1;     grid-row: 2; }
-        .info-field.field-data   { grid-column: 3;     grid-row: 2; }
+        /* Nome: cresce para preencher o espaço, mínimo 260px */
+        .info-field.field-nome   { flex: 1 1 260px; min-width: 200px; }
+        /* Número: largura fixa pequena */
+        .info-field.field-numero { flex: 0 0 70px; width: 70px; }
+        /* Série: largura fixa para "9º Ano A/B" */
+        .info-field.field-serie  { flex: 0 0 120px; width: 120px; }
+        /* Data: largura fixa para o campo de data */
+        .info-field.field-data   { flex: 0 0 150px; width: 150px; }
 
         .info-field {
             display: flex;
