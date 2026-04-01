@@ -135,69 +135,52 @@
         }
 
         /* ─── IMAGEM DA QUESTÃO ─── */
+
+        /* Container com imagem real — fundo branco/cinza claro para diagramas */
         .question-image-wrapper {
-            position: relative;
             width: 100%;
-            background: #0f172a;
-            overflow: hidden;
-        }
-
-        /* Imagem real */
-        .question-image-wrapper.has-real-image {
-            max-height: 260px;
+            background: #f0f4f8;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding: 18px 24px 0;
+            gap: 0;
         }
 
-        .question-image-wrapper.has-real-image img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            object-position: center top;
+        .question-image-wrapper img {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
             display: block;
-            transition: transform 0.4s ease;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+            background: white;
         }
 
-        .question-image-wrapper.has-real-image:hover img {
-            transform: scale(1.02);
-        }
-
-        /* Overlay gradiente suave sobre imagem real */
-        .question-image-wrapper.has-real-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(15,23,42,0.55) 100%);
-            pointer-events: none;
-        }
-
-        /* Badge de label sobre a imagem */
+        /* Badge de label abaixo da imagem */
         .image-label-badge {
-            position: absolute;
-            bottom: 12px;
-            left: 16px;
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(6px);
+            display: inline-block;
+            margin: 10px auto 14px;
+            background: #1e3c72;
             color: white;
             font-size: 0.72rem;
             font-weight: 700;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             letter-spacing: 0.4px;
-            z-index: 2;
         }
 
         /* Placeholder quando não há imagem (emoji) */
         .question-image-wrapper.placeholder {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 110px;
-            display: flex;
-            align-items: center;
+            border-bottom: none;
+            min-height: 100px;
             justify-content: center;
             flex-direction: column;
             gap: 6px;
-            padding: 20px;
+            padding: 22px 24px;
         }
 
         .placeholder-emoji {
@@ -536,7 +519,7 @@
             options: ["Apegou-se à teoria dos miasmas, pois era aceita pelos colegas.", "Rejeitou todas as evidências por não concordar com a superlotação.", "Manteve a ideia de que o sino do padre era a principal causa.", "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência."],
             correct: 3,
             imageEmoji: "🧼", imageTitle: "Lavagem das Mãos", imageCaption: "Ignaz Semmelweis — Pioneiro da higienização",
-            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOof9/s300/images.jfif"
+            imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOof9/s600/images.jfif"
         },
         {
             text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. De acordo com o método científico, a principal falha dessa alegação é que:",
@@ -624,12 +607,12 @@
         // Imagem real
         if (q.imageUrl && q.imageUrl.trim() !== '') {
             return `
-                <div class="question-image-wrapper has-real-image">
+                <div class="question-image-wrapper">
                     <img src="${q.imageUrl}"
                          alt="${q.imageTitle}"
                          loading="lazy"
-                         onerror="this.closest('.question-image-wrapper').outerHTML='${buildPlaceholder(q).replace(/'/g, "&#39;")}'">
-                    <span class="image-label-badge">📷 ${q.imageTitle}</span>
+                         onerror="this.parentElement.classList.add('placeholder'); this.remove();">
+                    <span class="image-label-badge">📷 ${q.imageTitle} — ${q.imageCaption}</span>
                 </div>`;
         }
 
