@@ -308,7 +308,6 @@
 
         .itable td:first-child { text-align: left; font-weight: 700; }
 
-        /* Célula em branco — clicável */
         .itable td.cell-blank {
             cursor: pointer;
             position: relative;
@@ -334,7 +333,6 @@
 
         .itable td.cell-blank:hover .cell-blank-inner { transform: scale(1.12); }
 
-        /* Célula respondida corretamente */
         .itable td.cell-correct {
             background: #d1fae5;
             color: #065f46;
@@ -349,7 +347,6 @@
             gap: 4px;
         }
 
-        /* Banner de conclusão */
         .table-complete-banner {
             display: none;
             margin-top: 12px;
@@ -368,7 +365,6 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Popup */
         .cell-popup-overlay {
             display: none;
             position: fixed; inset: 0;
@@ -502,6 +498,7 @@ const SPREADSHEET_ID = '12uVqpzcAhkHWWNL6eC1R5lEFVnvJhm4C3e4gPBQ5dF0';
 
 // ─── ALUNOS ───
 const alunosData = [
+    // 9º Ano A
     { nome: "ALICE CARVALHO", numero: 1, serie: "9º Ano A" },
     { nome: "AMANDA PASSOS DE ALMEIDA", numero: 2, serie: "9º Ano A" },
     { nome: "ANA CLARA SOUSA DA COSTA", numero: 4, serie: "9º Ano A" },
@@ -526,26 +523,31 @@ const alunosData = [
     { nome: "MIGUEL MARTINS DE ASSIS", numero: 30, serie: "9º Ano A" },
     { nome: "OMRAN RASEKH", numero: 31, serie: "9º Ano A" },
     { nome: "SARAH VITORIA ALVES OLIVEIRA", numero: 33, serie: "9º Ano A" },
-    { nome: "ANNA BEATRIZ SANTIAGO DA SILVA", numero: 1, serie: "9º Ano B" },
-    { nome: "ELIAS SILVA DE LIMA", numero: 3, serie: "9º Ano B" },
+    // 9º Ano B
     { nome: "ANA BEATRIZ DE LIMA TOMAZ", numero: 4, serie: "9º Ano B" },
+    { nome: "ANA BEATRIZ SANTIAGO DA SILVA", numero: 1, serie: "9º Ano B" },
+    { nome: "ANA CLARA GONCALVES TORRES LOYOLA", numero: 35, serie: "9º Ano B" },
+    { nome: "CHRISTOFER FELIPY SANTOS FONSECA", numero: 38, serie: "9º Ano B" },
+    { nome: "ELIAS SILVA DE LIMA", numero: 3, serie: "9º Ano B" },
     { nome: "EVERTON HENRIQUE CARMO RODRIGUES", numero: 4, serie: "9º Ano B" },
     { nome: "GABRIELA VITORIA SEVERA LINS", numero: 5, serie: "9º Ano B" },
+    { nome: "ISABELLA MONTEIRO BARCELLOS", numero: 42, serie: "9º Ano B" },
     { nome: "JENNYFER VITORIA BASILIO GOMES", numero: 6, serie: "9º Ano B" },
     { nome: "JULIO CESAR ALVES DOS SANTOS", numero: 7, serie: "9º Ano B" },
     { nome: "LORENA ALEXANDRE SANTOS DA SILVA", numero: 8, serie: "9º Ano B" },
     { nome: "LUAN VENITES BALBINO", numero: 9, serie: "9º Ano B" },
     { nome: "MARIA EDUARDA FELIX DA SILVA", numero: 11, serie: "9º Ano B" },
     { nome: "MUNIQUE CRISTINA LUCAS", numero: 13, serie: "9º Ano B" },
+    { nome: "NICOLY VITORIA SANTOS DE MENEZES", numero: 43, serie: "9º Ano B" },
     { nome: "NICOLAS PENTEADO", numero: 14, serie: "9º Ano B" },
     { nome: "PAULO CELSO DA COSTA JUNIOR", numero: 15, serie: "9º Ano B" },
     { nome: "PIETRO RODRIGUES MIRANDA", numero: 18, serie: "9º Ano B" },
     { nome: "RAPHAELLY APARECIDA MARINHO DE OLIVEIRA", numero: 19, serie: "9º Ano B" },
     { nome: "RENAN LEANDRO RODRIGUES VICENTE", numero: 21, serie: "9º Ano B" },
+    { nome: "RENATO SOUZA SANTOS", numero: 37, serie: "9º Ano B" },
     { nome: "SOPHIA MENEZES DE ARAUJO", numero: 23, serie: "9º Ano B" },
     { nome: "THAYNA SEABRA DE OLIVEIRA DO NASCIMENTO", numero: 24, serie: "9º Ano B" },
-    { nome: "VITORIA MENEZES BRANDAO", numero: 26, serie: "9º Ano B" },
-    { nome: "ISABELLA MONTEIRO BARCELLOS", numero: 42, serie: "9º Ano B" }
+    { nome: "VITORIA MENEZES BRANDAO", numero: 26, serie: "9º Ano B" }
 ];
 
 const alunosOrdenados = [...alunosData].sort((a, b) => a.nome.localeCompare(b.nome));
@@ -579,107 +581,163 @@ const dataInput = document.getElementById('dataAtividade');
 if (!dataInput.value) dataInput.value = new Date().toISOString().slice(0, 10);
 
 // ─── QUESTÕES ───
+// Gabarito diversificado: Q1=D, Q2=B, Q3=C, Q4=A, Q5=C, Q6=B, Q7=D, Q8=A, Q9=B, Q10=B
+// Distribuição: A×2, B×3, C×2, D×2 — bem equilibrado
+
 const questoes = [
     {
+        // Q1 — gabarito: D (índice 3) — mantido
         text: "O médico húngaro Ignaz Semmelweis, no século XIX, observou altas taxas de mortalidade de puérperas. Ele levantou várias hipóteses e, após testá-las, concluiu que a contaminação ocorria pelas mãos dos médicos. Com base no episódio e na definição de ciência proposta por Lee McIntyre, assinale a alternativa que melhor representa a postura de Semmelweis.",
-        options: ["Apegou-se à teoria dos miasmas, pois era aceita pelos colegas.", "Rejeitou todas as evidências por não concordar com a superlotação.", "Manteve a ideia de que o sino do padre era a principal causa.", "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência."],
-        correct: 3,
+        options: [
+            "Apegou-se à teoria dos miasmas, pois era aceita pelos colegas.",
+            "Rejeitou todas as evidências por não concordar com a superlotação.",
+            "Manteve a ideia de que o sino do padre era a principal causa.",
+            "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência."
+        ],
+        correct: 3, // D
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOof9/s600/images.jfif",
         imageEmoji: "🧼", imageTitle: "Lavagem das Mãos", imageCaption: "Ignaz Semmelweis — Pioneiro da higienização"
     },
     {
+        // Q2 — gabarito: B (índice 1) — mantido
         text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. De acordo com o método científico, a principal falha dessa alegação é que:",
-        options: ["não se baseia em observações do cotidiano.", "a hipótese não é falseável, ou seja, não pode ser testada nem refutada.", "a garagem é um local inadequado.", "não apresenta uma conclusão organizada."],
-        correct: 1,
+        options: [
+            "não se baseia em observações do cotidiano.",
+            "a hipótese não é falseável, ou seja, não pode ser testada nem refutada.",
+            "a garagem é um local inadequado para experimentos.",
+            "não apresenta uma conclusão organizada em relatório."
+        ],
+        correct: 1, // B
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNvNVUdgQLRPpAPb5OmJsKWg4v2Aiqs_Sqmd6GqPQxUTJQpJqbnByJ3T3ExpdgDLXOMUwhvL8lKOEA3D0NT5dV1wxNsOV9IMDzRSJ1dtgZHkVl1k1qj1g3urQLTXaYGGRKhxwB-0BeoHdUC4Bbb3x0uge1zhGxlfbBfnRA9-dlDtd_kh37YBck66teZYFD/s282/images%20%281%29.jfif",
         imageEmoji: "🐉", imageTitle: "Dragão Invisível", imageCaption: "Metáfora de Carl Sagan sobre falseabilidade"
     },
     {
+        // Q3 — gabarito: C (índice 2) — mantido
         text: "Uma notícia circula nas redes sociais com o título: 'Tomar suco de limão em jejum emagrece e os Cientistas não querem que você saiba!'. Qual atitude crítica deve ser tomada?",
-        options: ["Compartilhar imediatamente.", "Acreditar porque cita 'cientistas'.", "Verificar a autoria, a data e buscar fontes confiáveis.", "Ignorar a data de publicação."],
-        correct: 2,
+        options: [
+            "Compartilhar imediatamente para alertar os amigos.",
+            "Acreditar porque o título cita 'cientistas'.",
+            "Verificar a autoria, a data e buscar fontes confiáveis antes de compartilhar.",
+            "Ignorar completamente, pois toda notícia de saúde é falsa."
+        ],
+        correct: 2, // C
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiKVqxSX7tT_Y_tT8MEDd2A6hmdSgxzUo3EKnnZUR4R06drrYU-GRoRlAogLaHz4eiyFBNAhpOqzMSR81SNZzVy9XYdnl9S52iE5aY2f-0y9rHltrlfKpTYBZ7bX_0qt4enuEaZeCowzpdrd8HHgN-PkuDwyYDjRkB9Amy17q0fulKLvpnGdUdljPV13rit/s387/suco.PNG",
         imageEmoji: "📰", imageTitle: "Fake News", imageCaption: "Desinformação científica nas redes sociais"
     },
     {
+        // Q4 — gabarito: A (índice 0) — ALTERNATIVAS REORDENADAS para a resposta ficar em A
         text: "O texto 'Mudanças climáticas e a sociedade' (IAG-USP) menciona que 97% dos artigos científicos concordam que o aquecimento global tem origem humana. A principal razão para considerar esse texto confiável é:",
-        options: ["apresentar uma opinião polêmica.", "ser escrito por um único autor.", "basear-se em evidências e ser produzido por instituição científica de renome.", "ignorar dados de temperatura."],
-        correct: 2,
-        imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR8baKCLyjXFp6Mcr3zWNW9QY-n4Ksrq7rGhLgXfLQtzkR-WA0GWvReSk11qC0c8GwdYmrMcVLakX35CxGbxEBQ3MFWZvk5DThLkUsrZN1q1nNgV_ScGLFsl1WgQCb8qwwwliOhOztqXULg6m3NA7-6xrDiR2z6UDN4guVZ1DGlyDDdHsVdofHKKElJYhz/s528/Capturar.PNG",
+        options: [
+            "basear-se em evidências e ser produzido por instituição científica de renome.",
+            "apresentar uma opinião polêmica que gera debate.",
+            "ser escrito por um único autor especialista.",
+            "ignorar dados históricos de temperatura para focar no presente."
+        ],
+        correct: 0, // A
+        imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR8baKCLyjXFp6Mcr3zWNW9QY-n4Ksrq7rGhLgXfLQtzkR-WA0GWvReSk11qC0c8GwdYmrMcVLakX35CxGbxEeBQ3MFWZvk5DThLkUsrZN1q1nNgV_ScGLFsl1WgQCb8qwwwliOhOztqXULg6m3NA7-6xrDiR2z6UDN4guVZ1DGlyDDdHsVdofHKKElJYhz/s528/Capturar.PNG",
         imageEmoji: "🌡️", imageTitle: "Mudanças Climáticas", imageCaption: "Consenso científico — IPCC"
     },
     {
-        text: "Leucipo e Demócrito propuseram o átomo como partícula indivisível. John Dalton retomou essa ideia. Qual foi a principal contribuição de Dalton?",
-        options: ["Afirmou que os átomos são divisíveis.", "Propôs que a matéria é contínua.", "Baseou sua teoria em evidências experimentais e Leis Ponderais.", "Negou a existência de átomos."],
-        correct: 2,
-        imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQYDTQVpHCQkte9MX2Dzz-ltsCNUj3W4ulQfnvnu-sbRLYYvTfMfJgFskgEEGtx9l6IyYugkdWlMtP1yofYKjIW7BqBSajTaDMne8PfavmYYrDc3OmaJbrjwtBllHSw8yflIGkxKgzKa31LN8srtBWiuAV_WxiSKH3gBMR2Yp1BdMNuJzy0MiGOFISxGHA/s542/Capturar.PNG",
+        // Q5 — gabarito: C (índice 2) — mantido
+        text: "Leucipo e Demócrito propuseram o átomo como partícula indivisível. John Dalton retomou essa ideia. Qual foi a principal contribuição de Dalton em relação aos pensadores gregos?",
+        options: [
+            "Afirmou que os átomos são divisíveis em partículas menores.",
+            "Propôs que a matéria é contínua e não possui átomos.",
+            "Baseou sua teoria em evidências experimentais e nas Leis Ponderais.",
+            "Negou completamente a existência de átomos."
+        ],
+        correct: 2, // C
+        imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQYDTQVpHCQkte9MX2Dzz-ltsCNUj3W4ulQfnvnu-sbRLYYvTfMiW7BqBSajTaDMne8PfavmYYrDc3OmaJbrjwtBllHSw8yflIGkxKgzKa31LN8srtBWiuAV_WxiSKH3gBMR2Yp1BdMNuJzy0MiGOFISxGHA/s542/Capturar.PNG",
         imageEmoji: "⚛️", imageTitle: "Modelo de Dalton", imageCaption: "Átomo como esfera maciça — Bola de Bilhar"
     },
     {
-        text: "O modelo de Rutherford revelou o núcleo atômico, mas tinha uma limitação. Niels Bohr solucionou esse problema ao propor que:",
-        options: ["elétrons estão fixos na eletrosfera.", "elétrons ocupam órbitas com níveis de energia quantizados.", "o átomo é uma esfera maciça.", "prótons estão espalhados como passas."],
-        correct: 1,
+        // Q6 — gabarito: B (índice 1) — mantido
+        text: "O modelo de Rutherford revelou o núcleo atômico, mas apresentava uma limitação: os elétrons em órbita deveriam perder energia e colapsar. Niels Bohr solucionou esse problema ao propor que:",
+        options: [
+            "elétrons estão completamente fixos e imóveis na eletrosfera.",
+            "elétrons ocupam órbitas estacionárias com níveis de energia quantizados.",
+            "o átomo é uma esfera maciça sem espaços vazios.",
+            "prótons estão espalhados pela nuvem eletrônica como passas no pudim."
+        ],
+        correct: 1, // B
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAO1smlyslokvL0FU9c38XwOS31nQ-9Oh8DNZmzcBrlh2kvwHy82X2CPMe_0mE-S3oOwrU-9CzEGnHeFzmZZZeAN0Vlby2GymADcxrags_e9vq0AxdcDYvWdEleO-bRvN1RCaRvakflpO9ja0E89-375_l3Pl-Wdo2WMxqUyJOtpHDMjWJCcCcL9NpCIG-/s584/Capturar.PNG",
         imageEmoji: "🪐", imageTitle: "Modelo de Bohr", imageCaption: "Elétrons em órbitas com níveis de energia"
     },
     {
-        text: "Em um dia frio, é comum o 'embaçamento' do espelho após um banho quente. Qual transformação ocorre?",
-        options: ["Sublimação", "Fusão", "Condensação (gasoso → líquido)", "Solidificação"],
-        correct: 2,
+        // Q7 — gabarito: D (índice 3) — ALTERNATIVAS REORDENADAS para a resposta ficar em D
+        text: "Em um dia frio, é comum o 'embaçamento' do espelho após um banho quente. Qual transformação de estado físico ocorre nesse fenômeno?",
+        options: [
+            "Sublimação — sólido passando diretamente para o estado gasoso.",
+            "Fusão — sólido transformando-se em líquido pelo calor.",
+            "Solidificação — líquido transformando-se em sólido.",
+            "Condensação — vapor d'água (gasoso) tornando-se líquido ao contato com a superfície fria."
+        ],
+        correct: 3, // D
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1-HvBGecxLAae07zgKiIiW4MDEm4Ciufqse9i6WI8eOnfm5qRMhVV1iJ46-nj_aqbHivctIr7NtO0Yn4FY32fdgqXHCXRh0tFL6K6gAqDXheRKbEMY-rBeTmfkisT3ySSSRQ08FabZJUPBZR88jaIPmnc7ORbHiWyba0DnzaH8cP4dYhwT7EaX4X-keWP/s600/Vidro.PNG",
         imageEmoji: "🪞", imageTitle: "Embaçamento do Espelho", imageCaption: "Condensação do vapor de água"
     },
     {
-        text: "Água destilada tem ponto de fusão e ebulição constantes, enquanto água do mar não. Por quê?",
-        options: ["Substâncias puras têm pontos variáveis.", "Misturas têm patamares definidos.", "Substâncias puras mantêm temperatura constante durante mudança de estado; misturas têm componentes diferentes.", "Água do mar não ferve."],
-        correct: 2,
+        // Q8 — gabarito: A (índice 0) — ALTERNATIVAS REORDENADAS para a resposta ficar em A
+        text: "Água destilada tem ponto de fusão e ebulição constantes durante a mudança de estado, enquanto água do mar não apresenta esse comportamento. Por quê?",
+        options: [
+            "Substâncias puras mantêm temperatura constante durante a mudança de estado; misturas têm componentes com pontos de ebulição diferentes.",
+            "Substâncias puras têm pontos de fusão e ebulição variáveis conforme a pressão externa.",
+            "Misturas homogêneas apresentam sempre patamares definidos de temperatura.",
+            "A água do mar não ferve sob nenhuma condição de pressão."
+        ],
+        correct: 0, // A
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPIAknFyo7X_pZiNeWw9B_ipQ2dGiSpwZK4Km-372YcZQBlxs3ODZEUV9GnxrDj6o59wJ5Lv7G3VURP3_teanbF9nD3mJZpk6IHgr-KrFKp_I0NmE_WnB4VfNM81BkmvuFYXptdPIpof8MXJbjDx5O0vmnbW7dBnVlAxmTntnENlbyv2bwca6Q3ML61QvS/s600/Imgem.PNG",
         imageEmoji: "💧", imageTitle: "Curva de Aquecimento", imageCaption: "Patamares na substância pura vs. mistura"
     },
     {
+        // Q9 — gabarito: B (índice 1) — mantido
         text: "No simulador PhET abaixo, aquece o sistema fechado e pressione a tampa. Observe o aumento de pressão e temperatura. Isso demonstra que:",
-        options: ["energia térmica não interfere.", "ao comprimir o gás, moléculas colidem mais, aumentando pressão e energia cinética.", "matéria não obedece à conservação de energia.", "água não existe no estado gasoso."],
-        correct: 1,
+        options: [
+            "a energia térmica não interfere no movimento das moléculas do gás.",
+            "ao comprimir o gás, as moléculas colidem com maior frequência, aumentando a pressão e a energia cinética.",
+            "a matéria gasosa não obedece ao princípio da conservação de energia.",
+            "a água não existe no estado gasoso em condições normais de temperatura."
+        ],
+        correct: 1, // B
         simulator: true,
         simulatorUrl: "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_pt_BR.html",
         imageEmoji: "🔬", imageTitle: "Simulador PhET", imageCaption: "Interaja antes de responder!"
     },
     {
-        // QUESTÃO 10 — tabela interativa
+        // Q10 — gabarito: B (índice 1) — mantido (tabela interativa marca automaticamente)
         text: "Complete a tabela acima clicando nas células em vermelho e escolhendo o valor correto. Ao preencher tudo corretamente, a alternativa será marcada automaticamente.",
         options: [
-            "O número atômico (Z) indica a quantidade de nêutrons no núcleo.",
+            "O número atômico (Z) indica a quantidade de nêutrons no núcleo do átomo.",
             "O número atômico (Z) indica a quantidade de prótons; a massa atômica (A) é a soma de prótons e nêutrons.",
-            "A massa atômica (A) é sempre igual ao número atômico (Z).",
-            "Elementos do mesmo período têm a mesma massa atômica."
+            "A massa atômica (A) é sempre igual ao número atômico (Z) para qualquer elemento.",
+            "Elementos do mesmo período na tabela periódica têm sempre a mesma massa atômica."
         ],
-        correct: 1,
+        correct: 1, // B
         interactiveTable: true
     }
 ];
 
+// ─── GABARITO (para referência): D B C A C B D A B B ───
+
 // ─── TABELA INTERATIVA ───
-// Dados corretos: elemento, Z, A, quais células ficam em branco
 const tableData = [
-    { elemento: "Hidrogênio", Z: 1,     A: 1,     blankZ: true,  blankA: true  },
-    { elemento: "Hélio",      Z: 2,     A: 4,     blankZ: false, blankA: false },
-    { elemento: "Carbono",    Z: 6,     A: 12,    blankZ: false, blankA: true  },
-    { elemento: "Sódio",      Z: 11,    A: 23,    blankZ: true,  blankA: false },
-    { elemento: "Fósforo",    Z: 15,    A: 31,    blankZ: false, blankA: true  },
-    { elemento: "Cloro",      Z: 17,    A: 35,    blankZ: true,  blankA: false },
-    { elemento: "Cálcio",     Z: 20,    A: 40,    blankZ: false, blankA: true  },
-    { elemento: "Ferro",      Z: 26,    A: 56,    blankZ: true,  blankA: false },
-    { elemento: "Neônio",     Z: 10,    A: 20,    blankZ: true,  blankA: true  },
+    { elemento: "Hidrogênio", Z: 1,  A: 1,  blankZ: true,  blankA: true  },
+    { elemento: "Hélio",      Z: 2,  A: 4,  blankZ: false, blankA: false },
+    { elemento: "Carbono",    Z: 6,  A: 12, blankZ: false, blankA: true  },
+    { elemento: "Sódio",      Z: 11, A: 23, blankZ: true,  blankA: false },
+    { elemento: "Fósforo",    Z: 15, A: 31, blankZ: false, blankA: true  },
+    { elemento: "Cloro",      Z: 17, A: 35, blankZ: true,  blankA: false },
+    { elemento: "Cálcio",     Z: 20, A: 40, blankZ: false, blankA: true  },
+    { elemento: "Ferro",      Z: 26, A: 56, blankZ: true,  blankA: false },
+    { elemento: "Neônio",     Z: 10, A: 20, blankZ: true,  blankA: true  },
 ];
 
-// Estado das respostas { "rowIdx_col": true }
 const cellAnswers = {};
 
 function getTotalBlanks() {
     return tableData.reduce((t, r) => t + (r.blankZ ? 1 : 0) + (r.blankA ? 1 : 0), 0);
 }
 
-// Gera 4 opções embaralhadas incluindo a correta
 function generateOptions(correct, col) {
     const poolZ = [1, 2, 6, 8, 10, 11, 14, 15, 17, 18, 20, 26];
     const poolA = [1, 4, 12, 16, 20, 23, 28, 31, 35, 40, 56, 58];
@@ -693,7 +751,6 @@ function generateOptions(correct, col) {
     return [...opts].sort(() => Math.random() - 0.5);
 }
 
-// Renderiza APENAS o tbody (sem recriar o container inteiro)
 function refreshTableBody() {
     const tbody = document.getElementById('itableBody');
     if (!tbody) return;
@@ -709,9 +766,7 @@ function refreshTableBody() {
             if (cellAnswers[zKey]) {
                 zCell = `<td class="cell-correct"><span class="cell-correct-inner">✅ ${row.Z}</span></td>`;
             } else {
-                zCell = `<td class="cell-blank" data-row="${ri}" data-col="Z" title="Clique para responder">
-                            <span class="cell-blank-inner">?</span>
-                         </td>`;
+                zCell = `<td class="cell-blank" data-row="${ri}" data-col="Z" title="Clique para responder"><span class="cell-blank-inner">?</span></td>`;
             }
         } else {
             zCell = `<td>${row.Z}</td>`;
@@ -721,9 +776,7 @@ function refreshTableBody() {
             if (cellAnswers[aKey]) {
                 aCell = `<td class="cell-correct"><span class="cell-correct-inner">✅ ${row.A}</span></td>`;
             } else {
-                aCell = `<td class="cell-blank" data-row="${ri}" data-col="A" title="Clique para responder">
-                            <span class="cell-blank-inner">?</span>
-                         </td>`;
+                aCell = `<td class="cell-blank" data-row="${ri}" data-col="A" title="Clique para responder"><span class="cell-blank-inner">?</span></td>`;
             }
         } else {
             aCell = `<td>${row.A}</td>`;
@@ -736,13 +789,10 @@ function refreshTableBody() {
     bindTableClicks();
 }
 
-// Vincula cliques nas células em branco
 function bindTableClicks() {
     document.querySelectorAll('#itableBody td.cell-blank').forEach(td => {
         td.addEventListener('click', function() {
-            const ri  = parseInt(this.dataset.row);
-            const col = this.dataset.col;
-            openCellPopup(ri, col);
+            openCellPopup(parseInt(this.dataset.row), this.dataset.col);
         });
     });
 }
@@ -753,8 +803,7 @@ function openCellPopup(rowIdx, col) {
     const label   = col === 'Z' ? 'número atômico (Z)' : 'massa atômica (A)';
     const options = generateOptions(correct, col);
 
-    document.getElementById('cellPopupTitle').textContent =
-        `Qual é o ${label} do ${row.elemento}?`;
+    document.getElementById('cellPopupTitle').textContent = `Qual é o ${label} do ${row.elemento}?`;
 
     const container = document.getElementById('cellPopupOptions');
     container.innerHTML = '';
@@ -772,16 +821,13 @@ function openCellPopup(rowIdx, col) {
 
 function handleCellAnswer(rowIdx, col, correct, chosen, btn) {
     if (Number(chosen) === Number(correct)) {
-        // CORRETO
         cellAnswers[`${rowIdx}_${col}`] = true;
         document.getElementById('cellPopupOverlay').classList.remove('active');
         refreshTableBody();
 
-        // Verificar se tabela está completa
         if (Object.keys(cellAnswers).length >= getTotalBlanks()) {
             document.getElementById('tableCompleteBanner').classList.add('show');
 
-            // Marcar alternativa B automaticamente (correct = 1)
             const q10idx = questoes.findIndex(q => q.interactiveTable);
             const correctOpt = questoes[q10idx].correct;
             const radio = document.querySelector(`input[name="q${q10idx}"][value="${correctOpt}"]`);
@@ -793,21 +839,18 @@ function handleCellAnswer(rowIdx, col, correct, chosen, btn) {
             }
         }
     } else {
-        // ERRADO — shake
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 500);
     }
 }
 
-// Fechar popup ao clicar no overlay
 document.getElementById('cellPopupOverlay').addEventListener('click', function(e) {
     if (e.target === this) this.classList.remove('active');
 });
 
-// ─── RENDERIZAÇÃO DAS QUESTÕES ───
+// ─── RENDERIZAÇÃO ───
 function renderImageBlock(q, idx) {
     if (q.interactiveTable) {
-        // Bloco especial da tabela — estrutura estática, tbody será preenchido depois
         return `
             <div class="interactive-table-wrapper">
                 <div class="interactive-table-hint">
@@ -833,8 +876,7 @@ function renderImageBlock(q, idx) {
         return `
             <div class="simulator-wrapper">
                 <div class="simulator-label">🧪 ${q.imageCaption}</div>
-                <iframe src="${q.simulatorUrl}" allowfullscreen
-                    title="Simulador PhET — ${q.imageTitle}" loading="lazy"></iframe>
+                <iframe src="${q.simulatorUrl}" allowfullscreen title="Simulador PhET" loading="lazy"></iframe>
             </div>`;
     }
 
@@ -882,7 +924,6 @@ function renderQuestions() {
 
     container.innerHTML = html;
 
-    // Interatividade das alternativas
     document.querySelectorAll('.alternative-item').forEach(item => {
         const radio = item.querySelector('input[type="radio"]');
         item.addEventListener('click', (e) => {
@@ -900,7 +941,6 @@ function renderQuestions() {
         });
     });
 
-    // Popular tabela interativa após inserir o HTML
     refreshTableBody();
 }
 
