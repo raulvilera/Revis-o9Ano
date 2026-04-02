@@ -501,28 +501,45 @@ const alunosData = [
     // 9º Ano A
     { nome: "ALICE CARVALHO", numero: 1, serie: "9º Ano A" },
     { nome: "AMANDA PASSOS DE ALMEIDA", numero: 2, serie: "9º Ano A" },
+    { nome: "ANA BEATRIZ RODRIGUES OLIVEIRA", numero: 3, serie: "9º Ano A" },
     { nome: "ANA CLARA SOUSA DA COSTA", numero: 4, serie: "9º Ano A" },
     { nome: "ANA JULIA MENEZES DA SILVA", numero: 5, serie: "9º Ano A" },
+    { nome: "ANDRIELLE FERNANDES DA COSTA", numero: 40, serie: "9º Ano A" },
     { nome: "ARTHUR COHEN BARRETO", numero: 7, serie: "9º Ano A" },
     { nome: "ARTHUR DAVI DE SOUZA FERNANDES", numero: 8, serie: "9º Ano A" },
+    { nome: "BELLAMY OHANA CINGANO PEREZ", numero: 39, serie: "9º Ano A" },
     { nome: "EDUARDA ALVES DE SOUZA", numero: 9, serie: "9º Ano A" },
     { nome: "EMANUEL ALVES OLIVEIRA", numero: 10, serie: "9º Ano A" },
     { nome: "ESTHER CRISTINE SILVA RIBEIRO", numero: 11, serie: "9º Ano A" },
+    { nome: "EVELLYN ALVES DA SILVA", numero: 45, serie: "9º Ano A" },
     { nome: "EVELLYN YASMIN TAVARES SILVA", numero: 12, serie: "9º Ano A" },
     { nome: "FELIPE DE SOUZA RODRIGUES", numero: 13, serie: "9º Ano A" },
     { nome: "FERNANDA POLACHINI MAYER GOMES MARQUES", numero: 14, serie: "9º Ano A" },
     { nome: "GUSTAVO AUGUSTO TOMBOLO REIS", numero: 16, serie: "9º Ano A" },
     { nome: "HENRIQUE ROCHA CARVALHAL", numero: 17, serie: "9º Ano A" },
+    { nome: "HINGRID SARAIVA DOS SANTOS", numero: 41, serie: "9º Ano A" },
     { nome: "IGOR MARTINS PEREIRA", numero: 18, serie: "9º Ano A" },
     { nome: "ISABELLA DOS SANTOS SALDANHA", numero: 19, serie: "9º Ano A" },
     { nome: "KAUANNY APARECIDA MALAQUIAS LIMA", numero: 22, serie: "9º Ano A" },
     { nome: "KÉTHILY NAYARA DA SILVA", numero: 23, serie: "9º Ano A" },
+    { nome: "LEONARDO DE AVELAR CARVALHO", numero: 48, serie: "9º Ano A" },
+    { nome: "LIVIA OLIVEIRA NASCIMENTO", numero: 47, serie: "9º Ano A" },
     { nome: "LOHRAN ROMUALDO MENDES DA SILVA", numero: 26, serie: "9º Ano A" },
+    { nome: "LUANA KAROLINE MARTINS DE OLIVEIRA", numero: 36, serie: "9º Ano A" },
     { nome: "LUIS MIGUEL GONCALVES DA SILVA", numero: 27, serie: "9º Ano A" },
+    { nome: "MANUELLA DE MORAES SOUZA", numero: 44, serie: "9º Ano A" },
     { nome: "MARCELA ROBERTO DE OLIVEIRA", numero: 28, serie: "9º Ano A" },
+    { nome: "MATHEUS HENRIQUE ALMEIDA DA SILVA", numero: 37, serie: "9º Ano A" },
+    { nome: "MATHEUS TURCHETTO", numero: 29, serie: "9º Ano A" },
+    { nome: "MELISSA VICTORIA DE OLIVEIRA CARVALHO", numero: 38, serie: "9º Ano A" },
     { nome: "MIGUEL MARTINS DE ASSIS", numero: 30, serie: "9º Ano A" },
     { nome: "OMRAN RASEKH", numero: 31, serie: "9º Ano A" },
+    { nome: "PATRICIA SEGURA", numero: 46, serie: "9º Ano A" },
+    { nome: "PRISCILLA VITORIA MENDES DE OLIVEIRA", numero: 32, serie: "9º Ano A" },
+    { nome: "RAUL HENRIQUE CRUS BAPTISTA", numero: 42, serie: "9º Ano A" },
     { nome: "SARAH VITORIA ALVES OLIVEIRA", numero: 33, serie: "9º Ano A" },
+    { nome: "YURI GABRIEL DE MORAES PONGOLINO", numero: 34, serie: "9º Ano A" },
+    { nome: "ZAYN AL ABIDIN RASULI", numero: 35, serie: "9º Ano A" },
     // 9º Ano B
     { nome: "ANA BEATRIZ DE LIMA TOMAZ", numero: 4, serie: "9º Ano B" },
     { nome: "ANA BEATRIZ SANTIAGO DA SILVA", numero: 1, serie: "9º Ano B" },
@@ -581,12 +598,8 @@ const dataInput = document.getElementById('dataAtividade');
 if (!dataInput.value) dataInput.value = new Date().toISOString().slice(0, 10);
 
 // ─── QUESTÕES ───
-// Gabarito diversificado: Q1=D, Q2=B, Q3=C, Q4=A, Q5=C, Q6=B, Q7=D, Q8=A, Q9=B, Q10=B
-// Distribuição: A×2, B×3, C×2, D×2 — bem equilibrado
-
 const questoes = [
     {
-        // Q1 — gabarito: D (índice 3) — mantido
         text: "O médico húngaro Ignaz Semmelweis, no século XIX, observou altas taxas de mortalidade de puérperas. Ele levantou várias hipóteses e, após testá-las, concluiu que a contaminação ocorria pelas mãos dos médicos. Com base no episódio e na definição de ciência proposta por Lee McIntyre, assinale a alternativa que melhor representa a postura de Semmelweis.",
         options: [
             "Apegou-se à teoria dos miasmas, pois era aceita pelos colegas.",
@@ -594,12 +607,11 @@ const questoes = [
             "Manteve a ideia de que o sino do padre era a principal causa.",
             "Mudou de ideia com base nos dados observáveis, abandonando hipóteses sem evidência."
         ],
-        correct: 3, // D
-        imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOof9/s600/images.jfif",
+        correct: 3,
+        imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBoXkx_fcWc7Or3KwIVEb1pH5DOmKP29vZ-Vh491syQqfNUpNpDQYWjWZC6ZYkeXGuEzyhalSc3l2j6vYvtqsauAfAZ0beVVs9CoEQNPxZBIs_xIYEMvIkV4BGwSlL5Lzc7uqm8HtaUHYdJ_xQzoG0TIJLQ7f02J5OzWiZ5jWCtXXDJ7Bgve_CNDSOOf9/s600/images.jfif",
         imageEmoji: "🧼", imageTitle: "Lavagem das Mãos", imageCaption: "Ignaz Semmelweis — Pioneiro da higienização"
     },
     {
-        // Q2 — gabarito: B (índice 1) — mantido
         text: "Carl Sagan usou a metáfora do 'dragão invisível na garagem' para ilustrar uma questão central do pensamento científico. De acordo com o método científico, a principal falha dessa alegação é que:",
         options: [
             "não se baseia em observações do cotidiano.",
@@ -607,12 +619,11 @@ const questoes = [
             "a garagem é um local inadequado para experimentos.",
             "não apresenta uma conclusão organizada em relatório."
         ],
-        correct: 1, // B
+        correct: 1,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNvNVUdgQLRPpAPb5OmJsKWg4v2Aiqs_Sqmd6GqPQxUTJQpJqbnByJ3T3ExpdgDLXOMUwhvL8lKOEA3D0NT5dV1wxNsOV9IMDzRSJ1dtgZHkVl1k1qj1g3urQLTXaYGGRKhxwB-0BeoHdUC4Bbb3x0uge1zhGxlfbBfnRA9-dlDtd_kh37YBck66teZYFD/s282/images%20%281%29.jfif",
         imageEmoji: "🐉", imageTitle: "Dragão Invisível", imageCaption: "Metáfora de Carl Sagan sobre falseabilidade"
     },
     {
-        // Q3 — gabarito: C (índice 2) — mantido
         text: "Uma notícia circula nas redes sociais com o título: 'Tomar suco de limão em jejum emagrece e os Cientistas não querem que você saiba!'. Qual atitude crítica deve ser tomada?",
         options: [
             "Compartilhar imediatamente para alertar os amigos.",
@@ -620,12 +631,11 @@ const questoes = [
             "Verificar a autoria, a data e buscar fontes confiáveis antes de compartilhar.",
             "Ignorar completamente, pois toda notícia de saúde é falsa."
         ],
-        correct: 2, // C
+        correct: 2,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiKVqxSX7tT_Y_tT8MEDd2A6hmdSgxzUo3EKnnZUR4R06drrYU-GRoRlAogLaHz4eiyFBNAhpOqzMSR81SNZzVy9XYdnl9S52iE5aY2f-0y9rHltrlfKpTYBZ7bX_0qt4enuEaZeCowzpdrd8HHgN-PkuDwyYDjRkB9Amy17q0fulKLvpnGdUdljPV13rit/s387/suco.PNG",
         imageEmoji: "📰", imageTitle: "Fake News", imageCaption: "Desinformação científica nas redes sociais"
     },
     {
-        // Q4 — gabarito: A (índice 0) — ALTERNATIVAS REORDENADAS para a resposta ficar em A
         text: "O texto 'Mudanças climáticas e a sociedade' (IAG-USP) menciona que 97% dos artigos científicos concordam que o aquecimento global tem origem humana. A principal razão para considerar esse texto confiável é:",
         options: [
             "basear-se em evidências e ser produzido por instituição científica de renome.",
@@ -633,12 +643,11 @@ const questoes = [
             "ser escrito por um único autor especialista.",
             "ignorar dados históricos de temperatura para focar no presente."
         ],
-        correct: 0, // A
+        correct: 0,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgR8baKCLyjXFp6Mcr3zWNW9QY-n4Ksrq7rGhLgXfLQtzkR-WA0GWvReSk11qC0c8GwdYmrMcVLakX35CxGbxEeBQ3MFWZvk5DThLkUsrZN1q1nNgV_ScGLFsl1WgQCb8qwwwliOhOztqXULg6m3NA7-6xrDiR2z6UDN4guVZ1DGlyDDdHsVdofHKKElJYhz/s528/Capturar.PNG",
         imageEmoji: "🌡️", imageTitle: "Mudanças Climáticas", imageCaption: "Consenso científico — IPCC"
     },
     {
-        // Q5 — gabarito: C (índice 2) — mantido
         text: "Leucipo e Demócrito propuseram o átomo como partícula indivisível. John Dalton retomou essa ideia. Qual foi a principal contribuição de Dalton em relação aos pensadores gregos?",
         options: [
             "Afirmou que os átomos são divisíveis em partículas menores.",
@@ -646,12 +655,11 @@ const questoes = [
             "Baseou sua teoria em evidências experimentais e nas Leis Ponderais.",
             "Negou completamente a existência de átomos."
         ],
-        correct: 2, // C
+        correct: 2,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQYDTQVpHCQkte9MX2Dzz-ltsCNUj3W4ulQfnvnu-sbRLYYvTfMiW7BqBSajTaDMne8PfavmYYrDc3OmaJbrjwtBllHSw8yflIGkxKgzKa31LN8srtBWiuAV_WxiSKH3gBMR2Yp1BdMNuJzy0MiGOFISxGHA/s542/Capturar.PNG",
         imageEmoji: "⚛️", imageTitle: "Modelo de Dalton", imageCaption: "Átomo como esfera maciça — Bola de Bilhar"
     },
     {
-        // Q6 — gabarito: B (índice 1) — mantido
         text: "O modelo de Rutherford revelou o núcleo atômico, mas apresentava uma limitação: os elétrons em órbita deveriam perder energia e colapsar. Niels Bohr solucionou esse problema ao propor que:",
         options: [
             "elétrons estão completamente fixos e imóveis na eletrosfera.",
@@ -659,12 +667,11 @@ const questoes = [
             "o átomo é uma esfera maciça sem espaços vazios.",
             "prótons estão espalhados pela nuvem eletrônica como passas no pudim."
         ],
-        correct: 1, // B
+        correct: 1,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAO1smlyslokvL0FU9c38XwOS31nQ-9Oh8DNZmzcBrlh2kvwHy82X2CPMe_0mE-S3oOwrU-9CzEGnHeFzmZZZeAN0Vlby2GymADcxrags_e9vq0AxdcDYvWdEleO-bRvN1RCaRvakflpO9ja0E89-375_l3Pl-Wdo2WMxqUyJOtpHDMjWJCcCcL9NpCIG-/s584/Capturar.PNG",
         imageEmoji: "🪐", imageTitle: "Modelo de Bohr", imageCaption: "Elétrons em órbitas com níveis de energia"
     },
     {
-        // Q7 — gabarito: D (índice 3) — ALTERNATIVAS REORDENADAS para a resposta ficar em D
         text: "Em um dia frio, é comum o 'embaçamento' do espelho após um banho quente. Qual transformação de estado físico ocorre nesse fenômeno?",
         options: [
             "Sublimação — sólido passando diretamente para o estado gasoso.",
@@ -672,12 +679,11 @@ const questoes = [
             "Solidificação — líquido transformando-se em sólido.",
             "Condensação — vapor d'água (gasoso) tornando-se líquido ao contato com a superfície fria."
         ],
-        correct: 3, // D
+        correct: 3,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1-HvBGecxLAae07zgKiIiW4MDEm4Ciufqse9i6WI8eOnfm5qRMhVV1iJ46-nj_aqbHivctIr7NtO0Yn4FY32fdgqXHCXRh0tFL6K6gAqDXheRKbEMY-rBeTmfkisT3ySSSRQ08FabZJUPBZR88jaIPmnc7ORbHiWyba0DnzaH8cP4dYhwT7EaX4X-keWP/s600/Vidro.PNG",
         imageEmoji: "🪞", imageTitle: "Embaçamento do Espelho", imageCaption: "Condensação do vapor de água"
     },
     {
-        // Q8 — gabarito: A (índice 0) — ALTERNATIVAS REORDENADAS para a resposta ficar em A
         text: "Água destilada tem ponto de fusão e ebulição constantes durante a mudança de estado, enquanto água do mar não apresenta esse comportamento. Por quê?",
         options: [
             "Substâncias puras mantêm temperatura constante durante a mudança de estado; misturas têm componentes com pontos de ebulição diferentes.",
@@ -685,12 +691,11 @@ const questoes = [
             "Misturas homogêneas apresentam sempre patamares definidos de temperatura.",
             "A água do mar não ferve sob nenhuma condição de pressão."
         ],
-        correct: 0, // A
+        correct: 0,
         imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPIAknFyo7X_pZiNeWw9B_ipQ2dGiSpwZK4Km-372YcZQBlxs3ODZEUV9GnxrDj6o59wJ5Lv7G3VURP3_teanbF9nD3mJZpk6IHgr-KrFKp_I0NmE_WnB4VfNM81BkmvuFYXptdPIpof8MXJbjDx5O0vmnbW7dBnVlAxmTntnENlbyv2bwca6Q3ML61QvS/s600/Imgem.PNG",
         imageEmoji: "💧", imageTitle: "Curva de Aquecimento", imageCaption: "Patamares na substância pura vs. mistura"
     },
     {
-        // Q9 — gabarito: B (índice 1) — mantido
         text: "No simulador PhET abaixo, aquece o sistema fechado e pressione a tampa. Observe o aumento de pressão e temperatura. Isso demonstra que:",
         options: [
             "a energia térmica não interfere no movimento das moléculas do gás.",
@@ -698,13 +703,12 @@ const questoes = [
             "a matéria gasosa não obedece ao princípio da conservação de energia.",
             "a água não existe no estado gasoso em condições normais de temperatura."
         ],
-        correct: 1, // B
+        correct: 1,
         simulator: true,
         simulatorUrl: "https://phet.colorado.edu/sims/html/states-of-matter-basics/latest/states-of-matter-basics_pt_BR.html",
         imageEmoji: "🔬", imageTitle: "Simulador PhET", imageCaption: "Interaja antes de responder!"
     },
     {
-        // Q10 — gabarito: B (índice 1) — mantido (tabela interativa marca automaticamente)
         text: "Complete a tabela acima clicando nas células em vermelho e escolhendo o valor correto. Ao preencher tudo corretamente, a alternativa será marcada automaticamente.",
         options: [
             "O número atômico (Z) indica a quantidade de nêutrons no núcleo do átomo.",
@@ -712,12 +716,10 @@ const questoes = [
             "A massa atômica (A) é sempre igual ao número atômico (Z) para qualquer elemento.",
             "Elementos do mesmo período na tabela periódica têm sempre a mesma massa atômica."
         ],
-        correct: 1, // B
+        correct: 1,
         interactiveTable: true
     }
 ];
-
-// ─── GABARITO (para referência): D B C A C B D A B B ───
 
 // ─── TABELA INTERATIVA ───
 const tableData = [
